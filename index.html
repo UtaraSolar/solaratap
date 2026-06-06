@@ -34,7 +34,7 @@ html{scroll-behavior:smooth;}
 body{font-family:"Noto Sans","Noto Sans SC",-apple-system,sans-serif;color:var(--t1);background:var(--navy);font-size:15px;line-height:1.8;overflow-x:hidden;}
 
 /* TICKER */
-.ticker{background:#000;padding:0.45rem 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.04);}
+.ticker{background:#000;padding:0.45rem 0;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.04);position:sticky;top:0;z-index:201;}
 .ticker-inner{display:inline-flex;align-items:center;gap:2rem;animation:tick 30s linear infinite;white-space:nowrap;}
 .ticker-inner:hover{animation-play-state:paused;}
 @keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -47,16 +47,20 @@ body{font-family:"Noto Sans","Noto Sans SC",-apple-system,sans-serif;color:var(-
 .ts{color:#1e293b;font-size:0.6rem;}
 
 /* HEADER */
-header{background:rgba(6,13,31,0.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.9rem 1.5rem;position:sticky;top:0;z-index:200;}
+header{background:rgba(6,13,31,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);border-bottom:1px solid rgba(255,255,255,0);padding:1.2rem 1.5rem;position:sticky;top:2.3rem;z-index:200;transition:all 0.4s ease;}
+header.scrolled{background:rgba(6,13,31,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.5rem 1.5rem;box-shadow:0 2px 20px rgba(0,0,0,0.3);}
 .hd{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;}
-.logo img{height:32px;width:auto;}
+.logo img{height:30px;width:auto;transition:height 0.3s;}
+header.scrolled .logo img{height:26px;}
 .logo-text{font-size:1.1rem;font-weight:800;color:white;display:none;}
 nav{display:flex;gap:1.5rem;}
 nav a{font-size:0.82rem;font-weight:600;color:#64748b;text-decoration:none;transition:color 0.2s;letter-spacing:0.03em;}
 nav a:hover{color:var(--g);}
-.lang-sel{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;color:#94a3b8;cursor:pointer;}
-@media(max-width:768px){nav{display:none;}}
+.lang-btns{display:flex;gap:0.3rem;}
+.lang-btn{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:0.3rem 0.6rem;font-size:0.75rem;font-weight:700;color:#64748b;cursor:pointer;transition:all 0.2s;font-family:inherit;letter-spacing:0.03em;}
+.lang-btn:hover,.lang-btn.active{background:var(--g);border-color:var(--g);color:white;}
+@media(max-width:768px){nav{display:none;}.lang-btn{padding:0.25rem 0.5rem;font-size:0.7rem;}}}
 
 /* HERO — Magazine style, full bleed */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;padding:0;}
@@ -343,11 +347,16 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
             <a href="#cases"><span data-lang="zh" class="lang-text">案例</span><span data-lang="en" class="lang-text hidden">Cases</span><span data-lang="ms" class="lang-text hidden">Kes</span></a>
             <a href="#faq">FAQ</a>
         </nav>
-        <select class="lang-sel" id="langSel" onchange="setLang(this.value)">
-            <option value="zh">中文</option>
-            <option value="en">English</option>
-            <option value="ms">BM</option>
-        </select>
+        <select class="lang-sel" id="langSel" onchange="setLang(this.value)" style="display:none;">
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+                <option value="ms">BM</option>
+            </select>
+            <div class="lang-btns">
+                <button class="lang-btn active" id="btn-zh" onclick="setLang('zh')">中</button>
+                <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" id="btn-ms" onclick="setLang('ms')">BM</button>
+            </div>
     </div>
 </header>
 
@@ -368,7 +377,7 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
         </div>
         <h1>
             <span data-lang="zh" class="lang-text">省下电费<br><em>领取回扣</em><span class="line2">SuRIA Home + Solar ATAP · 2026</span></span>
-            <span data-lang="en" class="lang-text hidden">Save Bills<br><em>Claim Rebate</em><span class="line2">SuRIA Home + Solar ATAP · 2026</span></span>
+            <span data-lang="en" class="lang-text hidden"><span style="display:block;font-size:0.38em;font-weight:600;color:#6ee7b7;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.3rem;">Malaysia Solar Rebate Initiative</span>SuRIA Home<br><em style="font-size:0.85em;">RM3,000 Rebate</em><span class="line2">Are You Eligible? · SuRIA Home & Solar ATAP 2026</span></span>
             <span data-lang="ms" class="lang-text hidden">Jimat Bil<br><em>Tuntut Rebat</em><span class="line2">SuRIA Home + Solar ATAP · 2026</span></span>
         </h1>
         <p class="hero-sub">
@@ -380,7 +389,7 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
             <div class="hero-num"><div class="hero-num-n">RM3,000</div><div class="hero-num-l"><span data-lang="zh" class="lang-text">最高回扣</span><span data-lang="en" class="lang-text hidden">Max Rebate</span><span data-lang="ms" class="lang-text hidden">Rebat Maks</span></div></div>
             <div class="hero-num"><div class="hero-num-n">250MW</div><div class="hero-num-l"><span data-lang="zh" class="lang-text">全国配额</span><span data-lang="en" class="lang-text hidden">Nat. Quota</span><span data-lang="ms" class="lang-text hidden">Kuota Nasional</span></div></div>
             <div class="hero-num"><div class="hero-num-n">90%</div><div class="hero-num-l"><span data-lang="zh" class="lang-text">最高省电</span><span data-lang="en" class="lang-text hidden">Max Savings</span><span data-lang="ms" class="lang-text hidden">Jimat Maks</span></div></div>
-            <div class="hero-num"><div class="hero-num-n">3–4年</div><div class="hero-num-l"><span data-lang="zh" class="lang-text">回本期</span><span data-lang="en" class="lang-text hidden">ROI Period</span><span data-lang="ms" class="lang-text hidden">Tempoh ROI</span></div></div>
+            <div class="hero-num"><div class="hero-num-n"><span data-lang="zh" class="lang-text">3–4年</span><span data-lang="en" class="lang-text hidden">3–4 Yrs</span><span data-lang="ms" class="lang-text hidden">3–4 Thn</span></div><div class="hero-num-l"><span data-lang="zh" class="lang-text">回本期</span><span data-lang="en" class="lang-text hidden">ROI Period</span><span data-lang="ms" class="lang-text hidden">Tempoh ROI</span></div></div>
         </div>
     </div>
     <div class="hero-scroll">
@@ -465,9 +474,9 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
                 <div class="off-tagline"><span data-lang="zh" class="lang-text">自发自用太阳能上网机制 · Accelerated Transition Action Programme</span><span data-lang="en" class="lang-text hidden">Self-Consumption Solar Grid Mechanism · Accelerated Transition Action Programme</span><span data-lang="ms" class="lang-text hidden">Mekanisme Grid Solar Guna Sendiri · Program Tindakan Peralihan Dipercepatkan</span></div>
                 <div class="off-grid">
                     <div class="off-cell"><div class="off-cell-n b">90%</div><div class="off-cell-l"><span data-lang="zh" class="lang-text">最高省电率</span><span data-lang="en" class="lang-text hidden">Max Savings</span><span data-lang="ms" class="lang-text hidden">Jimat Maks</span></div></div>
-                    <div class="off-cell"><div class="off-cell-n b">30年</div><div class="off-cell-l"><span data-lang="zh" class="lang-text">板材品质保证</span><span data-lang="en" class="lang-text hidden">Panel Quality</span><span data-lang="ms" class="lang-text hidden">Kualiti Panel</span></div></div>
-                    <div class="off-cell"><div class="off-cell-n b">10年</div><div class="off-cell-l"><span data-lang="zh" class="lang-text">TNB合约期</span><span data-lang="en" class="lang-text hidden">TNB Contract</span><span data-lang="ms" class="lang-text hidden">Kontrak TNB</span></div></div>
-                    <div class="off-cell"><div class="off-cell-n b">无限制</div><div class="off-cell-l"><span data-lang="zh" class="lang-text">申请配额</span><span data-lang="en" class="lang-text hidden">No Quota</span><span data-lang="ms" class="lang-text hidden">Tiada Had</span></div></div>
+                    <div class="off-cell"><div class="off-cell-n b"><span data-lang="zh" class="lang-text">30年</span><span data-lang="en" class="lang-text hidden">30 Yrs</span><span data-lang="ms" class="lang-text hidden">30 Thn</span></div><div class="off-cell-l"><span data-lang="zh" class="lang-text">板材品质保证</span><span data-lang="en" class="lang-text hidden">Panel Quality</span><span data-lang="ms" class="lang-text hidden">Kualiti Panel</span></div></div>
+                    <div class="off-cell"><div class="off-cell-n b"><span data-lang="zh" class="lang-text">10年</span><span data-lang="en" class="lang-text hidden">10 Yrs</span><span data-lang="ms" class="lang-text hidden">10 Thn</span></div><div class="off-cell-l"><span data-lang="zh" class="lang-text">TNB合约期</span><span data-lang="en" class="lang-text hidden">TNB Contract</span><span data-lang="ms" class="lang-text hidden">Kontrak TNB</span></div></div>
+                    <div class="off-cell"><div class="off-cell-n b"><span data-lang="zh" class="lang-text">无限制</span><span data-lang="en" class="lang-text hidden">Unlimited</span><span data-lang="ms" class="lang-text hidden">Tiada Had</span></div><div class="off-cell-l"><span data-lang="zh" class="lang-text">申请配额</span><span data-lang="en" class="lang-text hidden">No Quota</span><span data-lang="ms" class="lang-text hidden">Tiada Had</span></div></div>
                 </div>
                 <div class="off-flow">
                     <div class="off-step"><div class="off-step-n b">1</div><div class="off-step-l"><span data-lang="zh" class="lang-text">太阳能发电</span><span data-lang="en" class="lang-text hidden">Generate</span><span data-lang="ms" class="lang-text hidden">Jana</span></div></div>
@@ -584,7 +593,13 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
         <div class="stat-strip">
             <div class="stat-cell"><div class="stat-n">28.40</div><div class="stat-l"><span data-lang="zh" class="lang-text">最大单项 kWp</span><span data-lang="en" class="lang-text hidden">Largest single kWp</span><span data-lang="ms" class="lang-text hidden">kWp terbesar tunggal</span></div></div>
             <div class="stat-cell"><div class="stat-n">RM1,700</div><div class="stat-l"><span data-lang="zh" class="lang-text">最高月省电费</span><span data-lang="en" class="lang-text hidden">Highest monthly savings</span><span data-lang="ms" class="lang-text hidden">Penjimatan bulanan tertinggi</span></div></div>
-            <div class="stat-cell"><div class="stat-n">6+</div><div class="stat-l"><span data-lang="zh" class="lang-text">完工案例</span><span data-lang="en" class="lang-text hidden">Completed Cases</span><span data-lang="ms" class="lang-text hidden">Kes Siap</span></div></div>
+            <div class="stat-cell"><div class="stat-n">6+</div><div class="stat-l"><span data-lang="zh" class="lang-text">安装照片参考</span><span data-lang="en" class="lang-text hidden">Installation References</span><span data-lang="ms" class="lang-text hidden">Rujukan Pemasangan</span></div></div>
+        </div>
+
+        <!-- Decorative images strip -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.5rem;border-radius:12px;overflow:hidden;">
+            <img src="https://raw.githubusercontent.com/Spowersolar/solar-atap/main/C_PIC-1.jpg" alt="Solar Installation" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;">
+            <img src="https://raw.githubusercontent.com/Spowersolar/solar-atap/main/C_PIC-2.jpg" alt="Solar Commercial" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;">
         </div>
 
         <div class="cases-scroll">
@@ -736,15 +751,78 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
     </div>
 </section>
 
+<!-- CALCULATOR -->
+<section class="sec sec-light">
+    <div class="sec-inner" style="max-width:700px;">
+        <div class="label on-light"><div class="label-dot"></div><span data-lang="zh" class="lang-text">电费计算器</span><span data-lang="en" class="lang-text hidden">Bill Calculator</span><span data-lang="ms" class="lang-text hidden">Kalkulator Bil</span></div>
+        <h2 class="ttl dark"><span data-lang="zh" class="lang-text">我能省多少？</span><span data-lang="en" class="lang-text hidden">How Much Can I Save?</span><span data-lang="ms" class="lang-text hidden">Berapa Saya Boleh Jimat?</span></h2>
+        <p class="sub dark" style="margin-bottom:1.5rem;"><span data-lang="zh" class="lang-text">输入你的每月电费，即时查看预估节省金额。</span><span data-lang="en" class="lang-text hidden">Enter your monthly bill to see estimated savings instantly.</span><span data-lang="ms" class="lang-text hidden">Masukkan bil bulanan anda untuk lihat anggaran penjimatan dengan serta-merta.</span></p>
+
+        <div style="background:white;border-radius:16px;padding:2rem;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+            <div style="margin-bottom:1.5rem;">
+                <label style="display:block;font-size:0.82rem;font-weight:700;color:#475569;margin-bottom:0.5rem;letter-spacing:0.03em;">
+                    <span data-lang="zh" class="lang-text">每月电费 (RM)</span><span data-lang="en" class="lang-text hidden">Monthly Bill (RM)</span><span data-lang="ms" class="lang-text hidden">Bil Bulanan (RM)</span>
+                </label>
+                <div style="display:flex;align-items:center;gap:0.8rem;">
+                    <span style="font-size:1.1rem;font-weight:700;color:#94a3b8;">RM</span>
+                    <input type="number" id="calcBill" placeholder="200" min="50" max="5000"
+                        style="flex:1;border:2px solid #e2e8f0;border-radius:10px;padding:0.8rem 1rem;font-size:1.1rem;font-weight:700;color:#0f172a;outline:none;font-family:inherit;transition:border 0.2s;"
+                        oninput="calcSavings()" onfocus="this.style.borderColor='#10b981'" onblur="this.style.borderColor='#e2e8f0'">
+                </div>
+                <input type="range" id="calcSlider" min="50" max="2000" value="200" step="10"
+                    style="width:100%;margin-top:0.8rem;accent-color:#10b981;"
+                    oninput="document.getElementById('calcBill').value=this.value;calcSavings()">
+                <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:#94a3b8;margin-top:0.2rem;">
+                    <span>RM50</span><span>RM500</span><span>RM1,000</span><span>RM2,000</span>
+                </div>
+            </div>
+
+            <div id="calcResult" style="display:none;">
+                <div style="height:1px;background:#f1f5f9;margin-bottom:1.5rem;"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+                    <div style="background:#f0fdf4;border-radius:12px;padding:1.1rem;text-align:center;">
+                        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#059669;margin-bottom:0.3rem;"><span data-lang="zh" class="lang-text">月省电费</span><span data-lang="en" class="lang-text hidden">Monthly Savings</span><span data-lang="ms" class="lang-text hidden">Jimat Bulanan</span></div>
+                        <div id="resMth" style="font-size:1.6rem;font-weight:800;color:#059669;">RM0</div>
+                    </div>
+                    <div style="background:#f0fdf4;border-radius:12px;padding:1.1rem;text-align:center;">
+                        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#059669;margin-bottom:0.3rem;"><span data-lang="zh" class="lang-text">年省电费</span><span data-lang="en" class="lang-text hidden">Annual Savings</span><span data-lang="ms" class="lang-text hidden">Jimat Tahunan</span></div>
+                        <div id="resYr" style="font-size:1.6rem;font-weight:800;color:#059669;">RM0</div>
+                    </div>
+                    <div style="background:#eff6ff;border-radius:12px;padding:1.1rem;text-align:center;">
+                        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1d4ed8;margin-bottom:0.3rem;"><span data-lang="zh" class="lang-text">SuRIA 回扣</span><span data-lang="en" class="lang-text hidden">SuRIA Rebate</span><span data-lang="ms" class="lang-text hidden">Rebat SuRIA</span></div>
+                        <div id="resRebate" style="font-size:1.6rem;font-weight:800;color:#1d4ed8;">RM0</div>
+                    </div>
+                    <div style="background:#eff6ff;border-radius:12px;padding:1.1rem;text-align:center;">
+                        <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1d4ed8;margin-bottom:0.3rem;"><span data-lang="zh" class="lang-text">预估回本期</span><span data-lang="en" class="lang-text hidden">Est. ROI Period</span><span data-lang="ms" class="lang-text hidden">Anggaran ROI</span></div>
+                        <div id="resRoi" style="font-size:1.6rem;font-weight:800;color:#1d4ed8;">0 <span style="font-size:0.9rem;"><span data-lang="zh" class="lang-text">年</span><span data-lang="en" class="lang-text hidden">yrs</span><span data-lang="ms" class="lang-text hidden">thn</span></span></div>
+                    </div>
+                </div>
+                <div id="resNote" style="background:#fffbeb;border-left:3px solid #f59e0b;border-radius:0 8px 8px 0;padding:0.8rem 1rem;font-size:0.82rem;color:#92400e;"></div>
+                <a href="https://wa.me/60164017123?text=Hello%20Spower%2C%20I%20would%20like%20a%20free%20assessment" target="_blank" class="cta-btn" style="display:flex;justify-content:center;margin-top:1.2rem;">
+                    💬 <span data-lang="zh" class="lang-text">获取精准报价</span><span data-lang="en" class="lang-text hidden">Get Accurate Quote</span><span data-lang="ms" class="lang-text hidden">Dapatkan Sebut Harga</span>
+                </a>
+            </div>
+            <div id="calcPlaceholder" style="text-align:center;padding:1rem 0;color:#94a3b8;font-size:0.88rem;">
+                <span data-lang="zh" class="lang-text">👆 输入电费金额查看结果</span><span data-lang="en" class="lang-text hidden">👆 Enter your bill amount to see results</span><span data-lang="ms" class="lang-text hidden">👆 Masukkan amaun bil untuk lihat keputusan</span>
+            </div>
+        </div>
+        <p style="font-size:0.75rem;color:#94a3b8;margin-top:0.8rem;text-align:center;"><span data-lang="zh" class="lang-text">* 以上为估算数字，实际节省视系统大小和用电习惯而定。</span><span data-lang="en" class="lang-text hidden">* Estimated figures. Actual savings depend on system size and usage habits.</span><span data-lang="ms" class="lang-text hidden">* Anggaran sahaja. Penjimatan sebenar bergantung pada saiz sistem dan tabiat penggunaan.</span></p>
+    </div>
+</section>
+
 <!-- FAQ -->
 <section class="sec sec-white" id="faq">
     <div class="sec-inner" style="max-width:700px;">
         <div class="label on-light"><div class="label-dot"></div>FAQ</div>
         <h2 class="ttl dark"><span data-lang="zh" class="lang-text">常见问答</span><span data-lang="en" class="lang-text hidden">Frequently Asked Questions</span><span data-lang="ms" class="lang-text hidden">Soalan Lazim</span></h2>
         <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">小房子适合装太阳能吗？</span><span data-lang="en" class="lang-text hidden">Is solar suitable for small houses?</span><span data-lang="ms" class="lang-text hidden">Adakah solar sesuai untuk rumah kecil?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">适合。通过精准规划，小面积住宅也能获得良好的 ROI。我们提供免费屋顶评估，根据您的实际用电量推荐最合适的系统容量。</span><span data-lang="en" class="lang-text hidden">Yes. With precise planning, small homes can achieve good ROI. We offer free roof assessment to recommend the best system size based on your actual usage.</span><span data-lang="ms" class="lang-text hidden">Ya. Dengan perancangan tepat, rumah kecil boleh dapat ROI baik. Kami tawarkan penilaian bumbung percuma untuk syorkan saiz sistem terbaik.</span></div></div>
+        <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">SuRIA Home 申请流程是什么？</span><span data-lang="en" class="lang-text hidden">What is the SuRIA Home application process?</span><span data-lang="ms" class="lang-text hidden">Apakah proses permohonan SuRIA Home?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">① 联系 SEDA 认证安装商（如 Spower）进行免费评估 → ② 安装 Solar ATAP 系统 → ③ 完成 TNB 并网申请 → ④ 通过 PETRA 门户提交 SuRIA Home 回扣申请 → ⑤ 审核通过后回扣直接汇入账户。Spower 负责协助所有步骤。</span><span data-lang="en" class="lang-text hidden">① Contact a SEDA-certified installer (like Spower) for free assessment → ② Install Solar ATAP system → ③ Complete TNB grid connection → ④ Submit SuRIA Home rebate application via PETRA portal → ⑤ Upon approval, rebate is credited to your account. Spower assists with all steps.</span><span data-lang="ms" class="lang-text hidden">① Hubungi pemasang bertauliah SEDA (seperti Spower) untuk penilaian percuma → ② Pasang sistem Solar ATAP → ③ Lengkapkan sambungan grid TNB → ④ Hantar permohonan rebat SuRIA Home melalui portal PETRA → ⑤ Selepas diluluskan, rebat dikreditkan ke akaun anda. Spower bantu semua langkah.</span></div></div>
+        <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">SuRIA Home 和 Solar ATAP 有什么分别？</span><span data-lang="en" class="lang-text hidden">What is the difference between SuRIA Home and Solar ATAP?</span><span data-lang="ms" class="lang-text hidden">Apakah perbezaan antara SuRIA Home dan Solar ATAP?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">Solar ATAP 是太阳能安装的框架机制（取代 NEM 3.0），任何住宅都可以申请安装并将余电卖回 TNB。SuRIA Home 则是安装 Solar ATAP 后可以额外领取的政府现金回扣，最高 RM3,000。两者是配套使用的——先装 Solar ATAP，再申请 SuRIA Home 回扣。</span><span data-lang="en" class="lang-text hidden">Solar ATAP is the solar installation framework (replacing NEM 3.0) — any home can apply to install and sell excess electricity back to TNB. SuRIA Home is an additional government cash rebate of up to RM3,000 you can claim after installing Solar ATAP. They work together: install Solar ATAP first, then apply for SuRIA Home rebate.</span><span data-lang="ms" class="lang-text hidden">Solar ATAP adalah rangka kerja pemasangan solar (menggantikan NEM 3.0) — mana-mana rumah boleh mohon pasang dan jual elektrik lebihan ke TNB. SuRIA Home adalah rebat tunai kerajaan tambahan sehingga RM3,000 yang boleh anda tuntut selepas pasang Solar ATAP. Keduanya digunakan bersama: pasang Solar ATAP dahulu, kemudian mohon rebat SuRIA Home.</span></div></div>
+        <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">SuRIA Home 回扣什么时候会到账？</span><span data-lang="en" class="lang-text hidden">When will the SuRIA Home rebate be credited?</span><span data-lang="ms" class="lang-text hidden">Bilakah rebat SuRIA Home akan dikreditkan?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">申请提交后，审核通常需要 4–8 周。通过审核后回扣会直接汇入申请人银行账户。Spower 会全程跟进申请状态，确保顺利领取。</span><span data-lang="en" class="lang-text hidden">After submission, review typically takes 4–8 weeks. Once approved, the rebate is credited directly to the applicant's bank account. Spower will follow up on the application status throughout to ensure successful receipt.</span><span data-lang="ms" class="lang-text hidden">Selepas penghantaran, semakan biasanya mengambil masa 4–8 minggu. Setelah diluluskan, rebat dikreditkan terus ke akaun bank pemohon. Spower akan follow up status permohonan sepanjang masa.</span></div></div>
         <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">多久能收到 SuRIA Home 回扣？</span><span data-lang="en" class="lang-text hidden">How long to receive SuRIA Home rebate?</span><span data-lang="ms" class="lang-text hidden">Berapa lama untuk terima rebat SuRIA Home?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">系统安装并成功并网后即可申请，整个流程约 4–8 周。Spower 全程协助文件准备，确保顺利领取。</span><span data-lang="en" class="lang-text hidden">Apply after installation and grid connection. The whole process takes about 4–8 weeks. Spower assists with all documentation to ensure successful receipt.</span><span data-lang="ms" class="lang-text hidden">Mohon selepas pemasangan dan sambungan grid. Keseluruhan proses mengambil masa 4–8 minggu. Spower bantu semua dokumentasi.</span></div></div>
         <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">下雨天和晚上有发电吗？</span><span data-lang="en" class="lang-text hidden">Does it generate at night or rainy days?</span><span data-lang="ms" class="lang-text hidden">Adakah ia menjana pada malam atau hari hujan?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">阴天仍有 10–25% 发电量。晚上无法发电，由 TNB 电网供电。马来西亚全年日照充足，整体节省效果依然显著。</span><span data-lang="en" class="lang-text hidden">Cloudy days still generate 10–25%. No generation at night — TNB grid supplies. Malaysia's year-round sunshine means overall savings remain significant.</span><span data-lang="ms" class="lang-text hidden">Hari mendung masih jana 10–25%. Tiada penjanaan malam — grid TNB membekal. Cahaya matahari Malaysia sepanjang tahun kekalkan penjimatan ketara.</span></div></div>
         <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">安装需要多久？费用多少？</span><span data-lang="en" class="lang-text hidden">How long for installation? What's the cost?</span><span data-lang="ms" class="lang-text hidden">Berapa lama untuk pasang? Berapa kos?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">实际安装 1–2 天完成。含 TNB 申请全程约 2–4 周。费用方面，一般每 kWp 约 RM3,000–5,000，配合 SuRIA Home RM3,000 回扣，ROI 通常 3–4 年。联系我们获取免费报价。</span><span data-lang="en" class="lang-text hidden">Physical installation 1–2 days. Including TNB application, 2–4 weeks total. Cost is typically RM3,000–5,000 per kWp. With SuRIA Home RM3,000 rebate, ROI is usually 3–4 years. Contact us for a free quote.</span><span data-lang="ms" class="lang-text hidden">Pemasangan fizikal 1–2 hari. Termasuk permohonan TNB, 2–4 minggu. Kos biasanya RM3,000–5,000 setiap kWp. Dengan rebat SuRIA Home RM3,000, ROI biasanya 3–4 tahun.</span></div></div>
+        <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">TNB 账号不在我名下可以申请吗？</span><span data-lang="en" class="lang-text hidden">Can I apply if TNB account is not in my name?</span><span data-lang="ms" class="lang-text hidden">Boleh mohon jika akaun TNB bukan atas nama saya?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">SuRIA Home 要求申请人是 TNB 住宅账号的注册户主。若账号不在您名下，建议先办理更名手续。Spower 可以协助评估您的具体情况，提供最合适的建议。</span><span data-lang="en" class="lang-text hidden">SuRIA Home requires the applicant to be the registered TNB residential account holder. If the account is not in your name, we recommend transferring it first. Spower can assess your specific situation and provide the best advice.</span><span data-lang="ms" class="lang-text hidden">SuRIA Home memerlukan pemohon sebagai pemegang akaun kediaman TNB berdaftar. Jika akaun bukan atas nama anda, kami cadangkan pindah nama dahulu. Spower boleh nilai situasi anda dan beri nasihat terbaik.</span></div></div>
         <div class="faq-item"><div class="faq-q" onclick="faq(this)"><span data-lang="zh" class="lang-text">搬家怎么办？</span><span data-lang="en" class="lang-text hidden">What if I move house?</span><span data-lang="ms" class="lang-text hidden">Bagaimana jika saya berpindah?</span></div><div class="faq-a"><span data-lang="zh" class="lang-text">系统属于您的财产，可以增加房产价值。搬家时可转让给新业主，Spower 提供全程协助。</span><span data-lang="en" class="lang-text hidden">The system is your property and adds value to your home. You can transfer to the new owner when you move. Spower assists with the transfer.</span><span data-lang="ms" class="lang-text hidden">Sistem adalah harta anda dan menambah nilai rumah. Boleh dipindahkan ke pemilik baru. Spower bantu proses pemindahan.</span></div></div>
     </div>
 </section>
@@ -810,10 +888,24 @@ function setLang(l){
         const t=e.tagName;
         e.style.display=(t==='P'||t==='DIV'||t==='LI'||t==='H1'||t==='H2'||t==='H3')?'block':'inline';
     });
-    document.getElementById('langSel').value=l;
+    // Update buttons
+    ['zh','en','ms'].forEach(lang=>{
+        const btn=document.getElementById('btn-'+lang);
+        if(btn) btn.classList.toggle('active', lang===l);
+    });
     localStorage.setItem('lang',l);
 }
 document.addEventListener('DOMContentLoaded',()=>setLang(getLang()));
+
+// DYNAMIC HEADER
+window.addEventListener('scroll',()=>{
+    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+    const btn=document.getElementById('waBtn');
+    if(btn){
+        const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
+        btn.classList.toggle('show',pct>0.2);
+    }
+});
 
 // FAQ
 function faq(el){const i=el.parentElement;const o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open');}
@@ -852,13 +944,80 @@ function qReset(){
     document.getElementById('qs1').classList.add('active');
 }
 
-// WA FLOAT — show after 40% scroll
-window.addEventListener('scroll',()=>{
-    const btn=document.getElementById('waBtn');
-    if(!btn)return;
-    const pct=window.scrollY/(document.body.scrollHeight-window.innerHeight);
-    btn.classList.toggle('show',pct>0.2);
+// CALCULATOR — Kedah 3.7h sunshine, ATAP only (no battery)
+function calcSavings() {
+    const bill = parseFloat(document.getElementById('calcBill').value);
+    const slider = document.getElementById('calcSlider');
+    if (slider && bill) slider.value = Math.min(bill, 2000);
+
+    if (!bill || bill < 50) {
+        document.getElementById('calcResult').style.display = 'none';
+        document.getElementById('calcPlaceholder').style.display = 'block';
+        return;
+    }
+
+    const lang = localStorage.getItem('lang') || 'zh';
+
+    // TNB tariff: estimate kWh from bill (Kedah residential)
+    // Based on Excel lookup table: bill → kWh
+    const billKwhTable = [
+        [200,556],[250,635],[300,705],[350,804],[400,862],[450,956],
+        [500,1049],[550,1131],[600,1254],[650,1357],[700,1459],[750,1500],
+        [800,1500],[880,1501],[900,1535],[950,1618],[1000,1702]
+    ];
+    let kwhPerMonth = 0;
+    for (let i = 0; i < billKwhTable.length - 1; i++) {
+        if (bill >= billKwhTable[i][0] && bill <= billKwhTable[i+1][0]) {
+            const ratio = (bill - billKwhTable[i][0]) / (billKwhTable[i+1][0] - billKwhTable[i][0]);
+            kwhPerMonth = billKwhTable[i][1] + ratio * (billKwhTable[i+1][1] - billKwhTable[i][1]);
+            break;
+        }
+    }
+    if (!kwhPerMonth) kwhPerMonth = bill > 1000 ? bill * 1.7 : bill < 200 ? bill * 2.78 : 1702;
+
+    // Kedah sunshine: 3.7h/day, system efficiency ~80%
+    // Recommend system to cover ~70% of daytime usage (daytime = 30% of total)
+    const dayUseKwh = kwhPerMonth * 0.3;
+    const kWp = Math.min(Math.max(Math.ceil(dayUseKwh / (3.7 * 30 * 0.8) * 10) / 10, 3), 12);
+    const genPerMonth = kWp * 3.7 * 30 * 0.8;
+
+    // ATAP saving: daytime self-use at retail rate, surplus exported at SMP (~RM0.37/kWh)
+    const daytimeSave = Math.min(genPerMonth * 0.65, dayUseKwh) * (bill / kwhPerMonth);
+    const atapExport = Math.max(genPerMonth * 0.35, 0) * 0.37;
+    const mthSave = Math.round(daytimeSave + atapExport);
+    const yrSave = mthSave * 12;
+    const rebate = Math.min(Math.floor(kWp) * 600, 3000);
+
+    document.getElementById('resMth').textContent = 'RM' + mthSave.toLocaleString();
+    document.getElementById('resYr').textContent = 'RM' + yrSave.toLocaleString();
+    document.getElementById('resRebate').textContent = 'RM' + rebate.toLocaleString();
+
+    // ROI: hide price, show years range only
+    const roiLow = 3.0, roiHigh = 5.0;
+    document.getElementById('resRoi').innerHTML = roiLow + '–' + roiHigh + ' <span style="font-size:0.9rem;">' + (lang==='zh'?'年':lang==='en'?'yrs':'thn') + '</span>';
+
+    const notes = {
+        zh: `推荐系统容量约 ${kWp} kWp（Kedah 日照 3.7h/天）。预计每月发电约 ${Math.round(genPerMonth)} kWh。以上为估算，实际节省因用电习惯而异，建议联系我们获取精确报价。`,
+        en: `Recommended system ~${kWp} kWp (Kedah sunshine 3.7h/day). Est. monthly generation ~${Math.round(genPerMonth)} kWh. Figures are estimates only — actual savings vary by usage. Contact us for an accurate quote.`,
+        ms: `Sistem disyorkan ~${kWp} kWp (cahaya matahari Kedah 3.7j/hari). Jana bulanan anggaran ~${Math.round(genPerMonth)} kWh. Angka adalah anggaran sahaja — penjimatan sebenar berbeza mengikut penggunaan. Hubungi kami untuk sebut harga tepat.`
+    };
+    document.getElementById('resNote').textContent = '💡 ' + (notes[lang] || notes['zh']);
+
+    document.getElementById('calcResult').style.display = 'block';
+    document.getElementById('calcPlaceholder').style.display = 'none';
+}
+
+// LAZY LOAD IMAGES
+document.addEventListener('DOMContentLoaded', () => {
+    setLang(getLang());
+    // Add lazy loading to all case images
+    document.querySelectorAll('.case-img').forEach(img => {
+        img.loading = 'lazy';
+        img.decoding = 'async';
+    });
 });
+
+
 </script>
 </body>
 </html>
