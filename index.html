@@ -34,7 +34,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Malay", Helvetica, Arial, sans-serif;
             line-height: 1.7;
             color: var(--text-main);
             background-color: var(--light);
@@ -100,7 +100,7 @@
             gap: 1.5rem;
         }
 
-        .lang-toggle {
+        .lang-selector {
             background: var(--light);
             border: 1px solid #e2e8f0;
             border-radius: 6px;
@@ -108,18 +108,14 @@
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--text-main);
             transition: all 0.3s;
         }
 
-        .lang-toggle:hover {
+        .lang-selector:hover {
             background: var(--primary);
             color: white;
-        }
-
-        .lang-toggle.active {
-            background: var(--primary);
-            color: white;
+            border-color: var(--primary);
         }
 
         @media (max-width: 768px) {
@@ -200,17 +196,6 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary);
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: transparent;
-            color: white;
         }
 
         @media (max-width: 640px) {
@@ -411,6 +396,11 @@
             margin-bottom: 1rem;
             object-fit: cover;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
         }
 
         .case-info {
@@ -547,22 +537,9 @@
         .card:nth-child(3) { animation-delay: 0.2s; }
         .card:nth-child(4) { animation-delay: 0.3s; }
 
-        /* ========== LANGUAGE CONTENT ========== */
-        [data-lang="en"] { display: none; }
-
-        body.en [data-lang="zh-MY"] { display: none; }
-        body.en [data-lang="en"] { display: block; }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 640px) {
-            .container { padding: 1rem; }
-            .card { padding: 1.5rem; }
-            h2 { font-size: 1.2rem; }
-            h3 { font-size: 1rem; }
-            li { font-size: 0.9rem; }
-            .hero h1 { font-size: 1.5rem; }
-            .section-title { font-size: 1.5rem; }
-        }
+        /* ========== LANGUAGE SYSTEM ========== */
+        [data-lang] { display: none; }
+        [data-lang="zh"]:not(.hidden) { display: inline; }
 
         @media print {
             .cta-bar { display: none; }
@@ -577,27 +554,41 @@
 <header>
     <div class="header-content">
         <a href="#" class="logo">
-            <span data-lang="zh-MY">Spower Solar</span>
-            <span data-lang="en">Spower Solar</span>
+            <span>Spower Solar</span>
         </a>
         
         <nav>
-            <a href="#suria" data-lang="zh-MY">SuRIA Home</a>
-            <a href="#suria" data-lang="en">SuRIA Home</a>
+            <a href="#suria">
+                <span data-lang="zh" class="lang-text">SuRIA Home</span>
+                <span data-lang="en" class="lang-text hidden">SuRIA Home</span>
+                <span data-lang="ms" class="lang-text hidden">SuRIA Home</span>
+            </a>
             
-            <a href="#atap" data-lang="zh-MY">Solar ATAP</a>
-            <a href="#atap" data-lang="en">Solar ATAP</a>
+            <a href="#atap">
+                <span data-lang="zh" class="lang-text">Solar ATAP</span>
+                <span data-lang="en" class="lang-text hidden">Solar ATAP</span>
+                <span data-lang="ms" class="lang-text hidden">Solar ATAP</span>
+            </a>
             
-            <a href="#cases" data-lang="zh-MY">成功案例</a>
-            <a href="#cases" data-lang="en">Success Cases</a>
+            <a href="#cases">
+                <span data-lang="zh" class="lang-text">成功案例</span>
+                <span data-lang="en" class="lang-text hidden">Success Cases</span>
+                <span data-lang="ms" class="lang-text hidden">Kes Berjaya</span>
+            </a>
             
-            <a href="#faq" data-lang="zh-MY">常见问答</a>
-            <a href="#faq" data-lang="en">FAQ</a>
+            <a href="#faq">
+                <span data-lang="zh" class="lang-text">常见问答</span>
+                <span data-lang="en" class="lang-text hidden">FAQ</span>
+                <span data-lang="ms" class="lang-text hidden">Soalan Lazim</span>
+            </a>
         </nav>
         
         <div class="header-right">
-            <button class="lang-toggle active" onclick="switchLanguage('zh-MY')">中文</button>
-            <button class="lang-toggle" onclick="switchLanguage('en')">English</button>
+            <select class="lang-selector" id="langSelector" onchange="switchLanguage(this.value)">
+                <option value="zh">中文</option>
+                <option value="en">English</option>
+                <option value="ms">Bahasa Melayu</option>
+            </select>
         </div>
     </div>
 </header>
@@ -605,20 +596,28 @@
 <!-- ========== HERO ========== -->
 <section class="hero">
     <div class="hero-content">
-        <h1 data-lang="zh-MY">💰 马来西亚太阳能回扣完整指南</h1>
-        <h1 data-lang="en">💰 Malaysia Solar Subsidy Complete Guide</h1>
+        <h1>
+            <span data-lang="zh" class="lang-text">💰 马来西亚太阳能回扣完整指南</span>
+            <span data-lang="en" class="lang-text hidden">💰 Malaysia Solar Subsidy Complete Guide</span>
+            <span data-lang="ms" class="lang-text hidden">💰 Panduan Lengkap Subsidi Solar Malaysia</span>
+        </h1>
         
-        <p data-lang="zh-MY">获取高达 RM3,000 现金回扣 + 每月节省 90% 电费。SuRIA Home 和 Solar ATAP 的终极指南。</p>
-        <p data-lang="en">Get up to RM3,000 cash rebate + save 90% monthly electricity. The ultimate guide to SuRIA Home and Solar ATAP.</p>
+        <p>
+            <span data-lang="zh" class="lang-text">获取高达 RM3,000 现金回扣 + 每月节省 90% 电费。SuRIA Home 和 Solar ATAP 的终极指南。</span>
+            <span data-lang="en" class="lang-text hidden">Get up to RM3,000 cash rebate + save 90% monthly electricity. The ultimate guide to SuRIA Home and Solar ATAP.</span>
+            <span data-lang="ms" class="lang-text hidden">Dapatkan sehingga RM3,000 rebat tunai + jimat 90% elektrik bulanan. Panduan terakhir untuk SuRIA Home dan Solar ATAP.</span>
+        </p>
         
         <div class="hero-buttons">
             <a href="#suria" class="btn btn-primary">
-                <span data-lang="zh-MY">📊 了解 SuRIA Home</span>
-                <span data-lang="en">📊 Learn SuRIA Home</span>
+                <span data-lang="zh" class="lang-text">📊 了解 SuRIA Home</span>
+                <span data-lang="en" class="lang-text hidden">📊 Learn SuRIA Home</span>
+                <span data-lang="ms" class="lang-text hidden">📊 Pelajari SuRIA Home</span>
             </a>
             <a href="#atap" class="btn btn-primary">
-                <span data-lang="zh-MY">⚡ 了解 Solar ATAP</span>
-                <span data-lang="en">⚡ Learn Solar ATAP</span>
+                <span data-lang="zh" class="lang-text">⚡ 了解 Solar ATAP</span>
+                <span data-lang="en" class="lang-text hidden">⚡ Learn Solar ATAP</span>
+                <span data-lang="ms" class="lang-text hidden">⚡ Pelajari Solar ATAP</span>
             </a>
         </div>
     </div>
@@ -629,93 +628,124 @@
 
     <!-- ========== SURIA HOME ========== -->
     <section class="section" id="suria">
-        <h2 class="section-title" data-lang="zh-MY">📊 SuRIA Home 资助计划</h2>
-        <h2 class="section-title" data-lang="en">📊 SuRIA Home Subsidy Program</h2>
+        <h2 class="section-title">
+            <span data-lang="zh" class="lang-text">📊 SuRIA Home 资助计划</span>
+            <span data-lang="en" class="lang-text hidden">📊 SuRIA Home Subsidy Program</span>
+            <span data-lang="ms" class="lang-text hidden">📊 Program Subsidi SuRIA Home</span>
+        </h2>
 
         <div class="grid">
-            <!-- Card 1: 什么是 SuRIA Home -->
+            <!-- Card 1 -->
             <div class="card">
-                <h2>💡 <span data-lang="zh-MY">什么是 SuRIA Home？</span><span data-lang="en">What is SuRIA Home?</span></h2>
-                <p data-lang="zh-MY">这是马来西亚政府为鼓励住宅用户安装太阳能而推出的官方现金回扣计划。旨在帮助民众降低安装初创成本，实现长期省电。</p>
-                <p data-lang="en">This is an official cash rebate program launched by the Malaysian government to encourage residential users to install solar energy. It aims to help people reduce installation costs and achieve long-term electricity savings.</p>
+                <h2>
+                    <span data-lang="zh" class="lang-text">💡 什么是 SuRIA Home？</span>
+                    <span data-lang="en" class="lang-text hidden">💡 What is SuRIA Home?</span>
+                    <span data-lang="ms" class="lang-text hidden">💡 Apa itu SuRIA Home?</span>
+                </h2>
+                <p data-lang="zh" class="lang-text">这是马来西亚政府为鼓励住宅用户安装太阳能而推出的官方现金回扣计划。旨在帮助民众降低安装初创成本，实现长期省电。</p>
+                <p data-lang="en" class="lang-text hidden">This is an official cash rebate program launched by the Malaysian government to encourage residential users to install solar energy. It aims to help people reduce installation costs.</p>
+                <p data-lang="ms" class="lang-text hidden">Ini adalah program rebat tunai rasmi yang dilancarkan oleh kerajaan Malaysia untuk menggalakkan pengguna kediaman memasang tenaga solar.</p>
                 
                 <div class="highlight-box">
-                    <strong data-lang="zh-MY">💬 政府支持：</strong>
-                    <strong data-lang="en">💬 Government Support:</strong>
-                    <span data-lang="zh-MY">由永续能源发展机构 (SEDA) 和国能 (TNB) 联合推出</span>
-                    <span data-lang="en">Jointly launched by SEDA (Suruhanjaya Tenaga Boleh Diperbaharui) and TNB</span>
+                    <strong data-lang="zh" class="lang-text">💬 政府支持：</strong>
+                    <strong data-lang="en" class="lang-text hidden">💬 Government Support:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">💬 Sokongan Kerajaan:</strong>
+                    <span data-lang="zh" class="lang-text">由永续能源发展机构 (SEDA) 和国能 (TNB) 联合推出</span>
+                    <span data-lang="en" class="lang-text hidden">Jointly launched by SEDA and TNB</span>
+                    <span data-lang="ms" class="lang-text hidden">Dilancarkan bersama oleh SEDA dan TNB</span>
                 </div>
             </div>
 
-            <!-- Card 2: 回扣金额 -->
+            <!-- Card 2 -->
             <div class="card">
-                <h2>💰 <span data-lang="zh-MY">您能获得多少回扣？</span><span data-lang="en">How Much Rebate Can You Get?</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">💰 您能获得多少回扣？</span>
+                    <span data-lang="en" class="lang-text hidden">💰 How Much Rebate Can You Get?</span>
+                    <span data-lang="ms" class="lang-text hidden">💰 Berapa Rebat Yang Boleh Anda Dapat?</span>
+                </h2>
                 
-                <h3 data-lang="zh-MY">💵 回扣标准</h3>
-                <h3 data-lang="en">💵 Rebate Rate</h3>
+                <h3 data-lang="zh" class="lang-text">💵 回扣标准</h3>
+                <h3 data-lang="en" class="lang-text hidden">💵 Rebate Rate</h3>
+                <h3 data-lang="ms" class="lang-text hidden">💵 Kadar Rebat</h3>
                 <ul>
-                    <li data-lang="zh-MY">每安装 <strong>1 kWac</strong> 系统，可拿回 <strong>RM600</strong> 现金</li>
-                    <li data-lang="en">For every <strong>1 kWac</strong> system installed, get <strong>RM600</strong> cash</li>
+                    <li data-lang="zh" class="lang-text">每安装 <strong>1 kWac</strong> 系统，可拿回 <strong>RM600</strong> 现金</li>
+                    <li data-lang="en" class="lang-text hidden">For every <strong>1 kWac</strong> system installed, get <strong>RM600</strong> cash</li>
+                    <li data-lang="ms" class="lang-text hidden">Untuk setiap sistem <strong>1 kWac</strong> yang dipasang, dapatkan <strong>RM600</strong> tunai</li>
                 </ul>
 
-                <h3 data-lang="zh-MY">🎯 回扣上限</h3>
-                <h3 data-lang="en">🎯 Maximum Rebate</h3>
+                <h3 data-lang="zh" class="lang-text">🎯 回扣上限</h3>
+                <h3 data-lang="en" class="lang-text hidden">🎯 Maximum Rebate</h3>
+                <h3 data-lang="ms" class="lang-text hidden">🎯 Rebat Maksimum</h3>
                 <ul>
-                    <li data-lang="zh-MY"><strong>最高 RM3,000</strong> 现金回扣（对应 5 kWac 及以上的系统）</li>
-                    <li data-lang="en"><strong>Maximum RM3,000</strong> cash rebate (for systems 5 kWac and above)</li>
+                    <li data-lang="zh" class="lang-text"><strong>最高 RM3,000</strong> 现金回扣（对应 5 kWac 及以上的系统）</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Maximum RM3,000</strong> cash rebate (for systems 5 kWac and above)</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Rebat Maksimum RM3,000</strong> (untuk sistem 5 kWac dan ke atas)</li>
                 </ul>
 
                 <div class="info-box">
-                    <strong data-lang="zh-MY">📈 示例：</strong>
-                    <strong data-lang="en">📈 Example:</strong>
-                    <span data-lang="zh-MY">• 3 kWac 系统 = RM1,800 | • 5 kWac 系统 = RM3,000 | • 7 kWac 系统 = RM3,000</span>
-                    <span data-lang="en">• 3 kWac system = RM1,800 | • 5 kWac system = RM3,000 | • 7 kWac system = RM3,000</span>
+                    <strong data-lang="zh" class="lang-text">📈 示例：</strong>
+                    <strong data-lang="en" class="lang-text hidden">📈 Example:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">📈 Contoh:</strong>
+                    <span data-lang="zh" class="lang-text">• 3 kWac = RM1,800 | • 5 kWac = RM3,000 | • 7 kWac = RM3,000</span>
+                    <span data-lang="en" class="lang-text hidden">• 3 kWac = RM1,800 | • 5 kWac = RM3,000 | • 7 kWac = RM3,000</span>
+                    <span data-lang="ms" class="lang-text hidden">• 3 kWac = RM1,800 | • 5 kWac = RM3,000 | • 7 kWac = RM3,000</span>
                 </div>
             </div>
 
-            <!-- Card 3: 申请资格 -->
+            <!-- Card 3 -->
             <div class="card">
-                <h2>📋 <span data-lang="zh-MY">谁符合申请资格？</span><span data-lang="en">Who Is Eligible?</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">📋 谁符合申请资格？</span>
+                    <span data-lang="en" class="lang-text hidden">📋 Who Is Eligible?</span>
+                    <span data-lang="ms" class="lang-text hidden">📋 Siapa Yang Layak?</span>
+                </h2>
                 <ul>
-                    <li data-lang="zh-MY"><strong>身份：</strong>马来西亚公民</li>
-                    <li data-lang="en"><strong>Citizenship:</strong> Malaysian citizen</li>
+                    <li data-lang="zh" class="lang-text"><strong>身份：</strong>马来西亚公民</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Citizenship:</strong> Malaysian citizen</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Kewarganegaraan:</strong> Warga Malaysia</li>
                     
-                    <li data-lang="zh-MY"><strong>户口：</strong>国能 (TNB) 住宅电费单的注册户主</li>
-                    <li data-lang="en"><strong>Account:</strong> Registered owner of TNB residential electricity bill</li>
+                    <li data-lang="zh" class="lang-text"><strong>户口：</strong>国能 (TNB) 住宅电费单的注册户主</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Account:</strong> Registered owner of TNB residential bill</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Akaun:</strong> Pemilik berdaftar bil kediaman TNB</li>
                     
-                    <li data-lang="zh-MY"><strong>系统：</strong>已安装 Solar ATAP 系统</li>
-                    <li data-lang="en"><strong>System:</strong> Already installed Solar ATAP system</li>
+                    <li data-lang="zh" class="lang-text"><strong>系统：</strong>已安装 Solar ATAP 系统</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>System:</strong> Already installed Solar ATAP system</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Sistem:</strong> Sudah memasang sistem Solar ATAP</li>
                     
-                    <li data-lang="zh-MY"><strong>时限：</strong>必须在 <strong>2026年12月31日前</strong> 完成安装和投运</li>
-                    <li data-lang="en"><strong>Deadline:</strong> Must complete installation and operation by <strong>December 31, 2026</strong></li>
-                    
-                    <li data-lang="zh-MY"><strong>限制：</strong>每个 TNB 账户仅限申请一次，且此前未享受过其他国家太阳能补贴</li>
-                    <li data-lang="en"><strong>Limitation:</strong> One application per TNB account, no previous national solar subsidies</li>
+                    <li data-lang="zh" class="lang-text"><strong>时限：</strong>必须在 <strong>2026年12月31日前</strong> 完成安装</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Deadline:</strong> Must complete installation by <strong>December 31, 2026</strong></li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Tarikh Akhir:</strong> Mesti siap sebelum <strong>31 Disember 2026</strong></li>
                 </ul>
 
                 <div class="warning-box">
-                    <strong data-lang="zh-MY">⚠️ 先到先得：</strong>
-                    <strong data-lang="en">⚠️ First Come, First Served:</strong>
-                    <span data-lang="zh-MY">政府总拨款额有限，配额抢完即止。建议尽早咨询和申请。</span>
-                    <span data-lang="en">Government funding is limited. We recommend consulting and applying early.</span>
+                    <strong data-lang="zh" class="lang-text">⚠️ 先到先得：</strong>
+                    <strong data-lang="en" class="lang-text hidden">⚠️ First Come, First Served:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">⚠️ Siapa Cepat Dia Dapat:</strong>
+                    <span data-lang="zh" class="lang-text">政府总拨款额有限，配额抢完即止。建议尽早咨询。</span>
+                    <span data-lang="en" class="lang-text hidden">Government funding is limited. We recommend consulting early.</span>
+                    <span data-lang="ms" class="lang-text hidden">Pembiayaan kerajaan terbatas. Kami cadangkan hubungi awal.</span>
                 </div>
             </div>
 
-            <!-- Card 4: 为什么现在是最佳时机 -->
+            <!-- Card 4 -->
             <div class="card">
-                <h2>🚀 <span data-lang="zh-MY">为什么现在是最佳时机？</span><span data-lang="en">Why Is Now The Best Time?</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">🚀 为什么现在是最佳时机？</span>
+                    <span data-lang="en" class="lang-text hidden">🚀 Why Is Now The Best Time?</span>
+                    <span data-lang="ms" class="lang-text hidden">🚀 Mengapa Sekarang Waktu Terbaik?</span>
+                </h2>
                 <ul>
-                    <li data-lang="zh-MY"><strong>时间有限：</strong>配额抢完即止，晚了就没有了</li>
-                    <li data-lang="en"><strong>Time Limited:</strong> Once quotas are exhausted, no more availability</li>
+                    <li data-lang="zh" class="lang-text"><strong>时间有限：</strong>配额抢完即止</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Time Limited:</strong> Once quotas are exhausted</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Masa Terbatas:</strong> Apabila kuota habis</li>
                     
-                    <li data-lang="zh-MY"><strong>截止日期：</strong>所有系统必须在 2026年12月31日前完成投运</li>
-                    <li data-lang="en"><strong>Deadline:</strong> All systems must be operational by December 31, 2026</li>
+                    <li data-lang="zh" class="lang-text"><strong>双重收益：</strong>RM3,000 回扣 + 每月省电</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Double Benefits:</strong> RM3,000 rebate + monthly savings</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Faedah Berganda:</strong> Rebat RM3,000 + jimat bulanan</li>
                     
-                    <li data-lang="zh-MY"><strong>双重收益：</strong>拿完 RM3,000 现金回扣后，系统开始运作，您的每月电费将大幅下降</li>
-                    <li data-lang="en"><strong>Double Benefits:</strong> After receiving RM3,000 rebate, your monthly electricity bill drops significantly</li>
-                    
-                    <li data-lang="zh-MY"><strong>投资回报：</strong>平均 3-4 年内收回成本，之后长期免费用电（系统寿命 25+ 年）</li>
-                    <li data-lang="en"><strong>ROI:</strong> Typically recover costs in 3-4 years, then free electricity for life (25+ year lifespan)</li>
+                    <li data-lang="zh" class="lang-text"><strong>投资回报：</strong>平均 3-4 年内收回成本</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>ROI:</strong> Typically recover costs in 3-4 years</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>ROI:</strong> Lazimnya kembali modal dalam 3-4 tahun</li>
                 </ul>
             </div>
         </div>
@@ -723,105 +753,133 @@
 
     <!-- ========== SOLAR ATAP ========== -->
     <section class="section" id="atap">
-        <h2 class="section-title" data-lang="zh-MY">⚡ Solar ATAP 全新机制</h2>
-        <h2 class="section-title" data-lang="en">⚡ Solar ATAP New Framework</h2>
+        <h2 class="section-title">
+            <span data-lang="zh" class="lang-text">⚡ Solar ATAP 全新机制</span>
+            <span data-lang="en" class="lang-text hidden">⚡ Solar ATAP New Framework</span>
+            <span data-lang="ms" class="lang-text hidden">⚡ Rangka Kerja Solar ATAP Baru</span>
+        </h2>
 
         <div class="grid">
-            <!-- Card 1: 什么是 ATAP -->
+            <!-- Card 1 -->
             <div class="card card-atap">
-                <h2>🎯 <span data-lang="zh-MY">什么是 Solar ATAP？</span><span data-lang="en">What is Solar ATAP?</span></h2>
-                <p data-lang="zh-MY">全称：<strong>Solar Accelerated Transition Action Programme</strong></p>
-                <p data-lang="en">Full name: <strong>Solar Accelerated Transition Action Programme</strong></p>
-                
-                <p data-lang="zh-MY">自 2026 年 1 月 1 日起，大马政府正式启动的全新太阳能框架，全面取代了旧的 NEM 3.0 系统。</p>
-                <p data-lang="en">Starting January 1, 2026, Malaysia's new solar framework officially launched by the government, completely replacing the old NEM 3.0 system.</p>
+                <h2>
+                    <span data-lang="zh" class="lang-text">🎯 什么是 Solar ATAP？</span>
+                    <span data-lang="en" class="lang-text hidden">🎯 What is Solar ATAP?</span>
+                    <span data-lang="ms" class="lang-text hidden">🎯 Apa itu Solar ATAP?</span>
+                </h2>
+                <p data-lang="zh" class="lang-text">自 2026 年 1 月 1 日起，大马政府正式启动的全新太阳能框架，全面取代旧的 NEM 3.0 系统。</p>
+                <p data-lang="en" class="lang-text hidden">Starting January 1, 2026, Malaysia's new solar framework officially launched by the government.</p>
+                <p data-lang="ms" class="lang-text hidden">Mulai 1 Januari 2026, rangka kerja solar baru Malaysia yang dilancarkan kerajaan secara rasmi.</p>
 
                 <div class="highlight-box">
-                    <strong data-lang="zh-MY">✨ 核心优势：</strong>
-                    <strong data-lang="en">✨ Key Benefits:</strong>
+                    <strong data-lang="zh" class="lang-text">✨ 核心优势：</strong>
+                    <strong data-lang="en" class="lang-text hidden">✨ Key Benefits:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">✨ Manfaat Utama:</strong>
                     <ul style="margin-top: 0.5rem;">
-                        <li data-lang="zh-MY">不再设"固定总配额"限制，更多家庭能安装太阳能</li>
-                        <li data-lang="en">No fixed total quota limit, more homes can install solar</li>
-                        <li data-lang="zh-MY">计费更透明，回扣更直接</li>
-                        <li data-lang="en">More transparent billing, direct rebates</li>
-                        <li data-lang="zh-MY">自发自用，多余回扣，机制更合理</li>
-                        <li data-lang="en">Self-use priority, excess sold back, more rational mechanism</li>
+                        <li data-lang="zh" class="lang-text">更多家庭能安装太阳能</li>
+                        <li data-lang="en" class="lang-text hidden">More homes can install solar</li>
+                        <li data-lang="ms" class="lang-text hidden">Lebih banyak rumah boleh pasang solar</li>
+                        <li data-lang="zh" class="lang-text">计费更透明</li>
+                        <li data-lang="en" class="lang-text hidden">More transparent billing</li>
+                        <li data-lang="ms" class="lang-text hidden">Bil lebih jelas</li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Card 2: 运作原理 -->
+            <!-- Card 2 -->
             <div class="card card-atap">
-                <h2>🔄 <span data-lang="zh-MY">核心运作逻辑：「自发自用」</span><span data-lang="en">Core Logic: "Self-Consumption First"</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">🔄 核心运作：「自发自用」</span>
+                    <span data-lang="en" class="lang-text hidden">🔄 Core Logic: "Self-Consumption"</span>
+                    <span data-lang="ms" class="lang-text hidden">🔄 Logik Teras: "Penggunaan Sendiri"</span>
+                </h2>
                 
-                <h3 data-lang="zh-MY">1️⃣ 白天直接免费用</h3>
-                <h3 data-lang="en">1️⃣ Free Daytime Usage</h3>
-                <p data-lang="zh-MY">太阳能板发电后，直接供您家里的冷气、冰箱等电器使用。这部分电完全免费，帮您省下高昂的 TNB 电费。</p>
-                <p data-lang="en">Solar panels generate electricity for your AC, refrigerator, and appliances directly. This portion is completely free, saving you expensive TNB fees.</p>
+                <h3 data-lang="zh" class="lang-text">1️⃣ 白天直接免费用</h3>
+                <h3 data-lang="en" class="lang-text hidden">1️⃣ Free Daytime Usage</h3>
+                <h3 data-lang="ms" class="lang-text hidden">1️⃣ Penggunaan Siang Percuma</h3>
+                <p data-lang="zh" class="lang-text">太阳能板发电直接供家里用，完全免费，省下高昂的电费。</p>
+                <p data-lang="en" class="lang-text hidden">Solar panels generate electricity directly for your home. Completely free!</p>
+                <p data-lang="ms" class="lang-text hidden">Panel solar menjana elektrik langsung untuk rumah anda. Percuma sepenuhnya!</p>
 
-                <h3 data-lang="zh-MY">2️⃣ 多余电量卖给 TNB</h3>
-                <h3 data-lang="en">2️⃣ Sell Excess to TNB</h3>
-                <p data-lang="zh-MY">如果您家里没人或用电少，用不完的电会自动输送回 TNB 电网。</p>
-                <p data-lang="en">If your home is empty or uses less electricity, excess power is automatically sent back to TNB grid.</p>
+                <h3 data-lang="zh" class="lang-text">2️⃣ 多余电量卖给 TNB</h3>
+                <h3 data-lang="en" class="lang-text hidden">2️⃣ Sell Excess to TNB</h3>
+                <h3 data-lang="ms" class="lang-text hidden">2️⃣ Jual Lebihan ke TNB</h3>
+                <p data-lang="zh" class="lang-text">用不完的电自动输送回 TNB 电网。</p>
+                <p data-lang="en" class="lang-text hidden">Excess power is automatically sent back to TNB grid.</p>
+                <p data-lang="ms" class="lang-text hidden">Kuasa lebihan dihantar kembali ke grid TNB secara automatik.</p>
 
-                <h3 data-lang="zh-MY">3️⃣ 电费单直接扣除</h3>
-                <h3 data-lang="en">3️⃣ Direct Bill Deduction</h3>
-                <p data-lang="zh-MY">输送回电网的电量会转化为电费信用 (Credits)，直接在您当月的 TNB 电费单里扣除。住宅用户直接抵扣每度电的零售电价成本。</p>
-                <p data-lang="en">Returned electricity converts to bill credits (Credits) deducted directly from your monthly TNB bill. Residential users get full retail price credit.</p>
+                <h3 data-lang="zh" class="lang-text">3️⃣ 电费单直接扣除</h3>
+                <h3 data-lang="en" class="lang-text hidden">3️⃣ Direct Bill Deduction</h3>
+                <h3 data-lang="ms" class="lang-text hidden">3️⃣ Potongan Bil Langsung</h3>
+                <p data-lang="zh" class="lang-text">回扣直接在当月 TNB 电费单扣除。</p>
+                <p data-lang="en" class="lang-text hidden">Credits deducted directly from your monthly TNB bill.</p>
+                <p data-lang="ms" class="lang-text hidden">Kredit dipotong langsung dari bil TNB bulanan anda.</p>
 
                 <div class="warning-box">
-                    <strong data-lang="zh-MY">⚠️ 重要：每月结算，不滚存</strong>
-                    <strong data-lang="en">⚠️ Important: Monthly Settlement, No Carryover</strong>
-                    <p data-lang="zh-MY">太阳能回扣是在当月电费单中直接扣除。如果发出的电太多，把当月电费扣到 RM0 还有剩余，剩余的额度<strong>不能带到下个月</strong>，也不会换成现金发放。</p>
-                    <p data-lang="en">Solar credits are deducted directly from your current month's bill. If excess remains after reducing bill to RM0, it <strong>cannot carry to next month</strong> and won't be paid as cash.</p>
-                </div>
-
-                <div class="highlight-box">
-                    <strong data-lang="zh-MY">💡 Spower 的专业建议（Right-Sizing）：</strong>
-                    <strong data-lang="en">💡 Spower Professional Advice (Right-Sizing):</strong>
-                    <p data-lang="zh-MY">在新的 ATAP 机制下，系统并非"越大越好"，而是需要根据您家庭白天的实际用电比例进行精准量身设计，才能让投资回报率（ROI）最大化。我们的专家团队将为您免费评估和设计最优方案。</p>
-                    <p data-lang="en">Under ATAP, bigger is not always better. Systems should be precisely sized to your daytime usage to maximize ROI. Our expert team will free assess and design the optimal solution.</p>
+                    <strong data-lang="zh" class="lang-text">⚠️ 重要：每月结算，不滚存</strong>
+                    <strong data-lang="en" class="lang-text hidden">⚠️ Important: Monthly Settlement</strong>
+                    <strong data-lang="ms" class="lang-text hidden">⚠️ Penting: Penyelesaian Bulanan</strong>
+                    <p data-lang="zh" class="lang-text">剩余额度不能带到下个月，也不会换成现金。</p>
+                    <p data-lang="en" class="lang-text hidden">Excess cannot carry to next month and won't be paid as cash.</p>
+                    <p data-lang="ms" class="lang-text hidden">Lebihan tidak boleh dibawa ke bulan depan dan tidak dibayar tunai.</p>
                 </div>
             </div>
 
-            <!-- Card 3: 安装容量限制 -->
+            <!-- Card 3 -->
             <div class="card card-atap">
-                <h2>📦 <span data-lang="zh-MY">住宅安装容量限制</span><span data-lang="en">Residential Installation Capacity Limits</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">📦 安装容量限制</span>
+                    <span data-lang="en" class="lang-text hidden">📦 Installation Capacity Limits</span>
+                    <span data-lang="ms" class="lang-text hidden">📦 Had Kapasiti Pemasangan</span>
+                </h2>
                 <ul>
-                    <li data-lang="zh-MY"><strong>单相电表（Single-Phase）：</strong>最高可安装 <strong>5 kW</strong></li>
-                    <li data-lang="en"><strong>Single-Phase Meter:</strong> Maximum <strong>5 kW</strong> installation</li>
+                    <li data-lang="zh" class="lang-text"><strong>单相电表：</strong>最高 <strong>5 kW</strong></li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Single-Phase:</strong> Maximum <strong>5 kW</strong></li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Fasa Tunggal:</strong> Maksimum <strong>5 kW</strong></li>
                     
-                    <li data-lang="zh-MY"><strong>三相电表（Three-Phase）：</strong>最高可安装 <strong>15 kW</strong></li>
-                    <li data-lang="en"><strong>Three-Phase Meter:</strong> Maximum <strong>15 kW</strong> installation</li>
+                    <li data-lang="zh" class="lang-text"><strong>三相电表：</strong>最高 <strong>15 kW</strong></li>
+                    <li data-lang="en" class="lang-text hidden"><strong>Three-Phase:</strong> Maximum <strong>15 kW</strong></li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Tiga Fasa:</strong> Maksimum <strong>15 kW</strong></li>
                 </ul>
 
                 <div class="info-box">
-                    <strong data-lang="zh-MY">📊 一般家庭足够：</strong>
-                    <strong data-lang="en">📊 Typical Household Sufficient:</strong>
-                    <p data-lang="zh-MY">大多数马来西亚家庭都是单相电表，5 kW 容量足以满足日常需求并最大化 ROI。</p>
-                    <p data-lang="en">Most Malaysian homes have single-phase meters. 5 kW capacity is sufficient for daily needs and maximizes ROI.</p>
+                    <strong data-lang="zh" class="lang-text">📊 一般家庭足够：</strong>
+                    <strong data-lang="en" class="lang-text hidden">📊 Typical Household Sufficient:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">📊 Rumah Biasa Cukup:</strong>
+                    <p data-lang="zh" class="lang-text">大多数家庭是单相电表，5 kW 足以满足日常需求。</p>
+                    <p data-lang="en" class="lang-text hidden">Most homes have single-phase meters. 5 kW is sufficient.</p>
+                    <p data-lang="ms" class="lang-text hidden">Kebanyakan rumah memiliki meter fasa tunggal. 5 kW cukup.</p>
                 </div>
             </div>
 
-            <!-- Card 4: 合约期限 -->
+            <!-- Card 4 -->
             <div class="card card-atap">
-                <h2>📜 <span data-lang="zh-MY">合约期限与权益</span><span data-lang="en">Contract Duration & Rights</span></h2>
+                <h2>
+                    <span data-lang="zh" class="lang-text">📜 合约期限与权益</span>
+                    <span data-lang="en" class="lang-text hidden">📜 Contract Duration & Rights</span>
+                    <span data-lang="ms" class="lang-text hidden">📜 Tempoh Kontrak & Hak</span>
+                </h2>
                 <ul>
-                    <li data-lang="zh-MY"><strong>10 年合约期：</strong>与 TNB 签署的 ATAP 发电回扣合约期限为 10 年</li>
-                    <li data-lang="en"><strong>10-Year Contract:</strong> ATAP generation rebate contract with TNB is 10 years</li>
+                    <li data-lang="zh" class="lang-text"><strong>10 年合约期：</strong>与 TNB 签署的合约期为 10 年</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>10-Year Contract:</strong> TNB contract is 10 years</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Kontrak 10 Tahun:</strong> Kontrak TNB adalah 10 tahun</li>
                     
-                    <li data-lang="zh-MY"><strong>10 年后：</strong>系统依然属于您并可以继续免费发电供家里自用</li>
-                    <li data-lang="en"><strong>After 10 Years:</strong> System remains yours, can continue generating free electricity for home use</li>
+                    <li data-lang="zh" class="lang-text"><strong>10 年后：</strong>系统依然属于您并可继续免费发电</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>After 10 Years:</strong> System remains yours, can continue generating</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Selepas 10 Tahun:</strong> Sistem masih milik anda, terus menjana</li>
                     
-                    <li data-lang="zh-MY"><strong>系统寿命：</strong>现代太阳能系统寿命长达 25+ 年，质保通常 10-25 年</li>
-                    <li data-lang="en"><strong>System Lifespan:</strong> Modern solar systems last 25+ years with warranties typically 10-25 years</li>
+                    <li data-lang="zh" class="lang-text"><strong>系统寿命：</strong>现代系统寿命 25+ 年，质保 10-25 年</li>
+                    <li data-lang="en" class="lang-text hidden"><strong>System Lifespan:</strong> 25+ years with 10-25 year warranties</li>
+                    <li data-lang="ms" class="lang-text hidden"><strong>Jangka Hayat Sistem:</strong> 25+ tahun dengan jaminan 10-25 tahun</li>
                 </ul>
 
                 <div class="highlight-box">
-                    <strong data-lang="zh-MY">✅ 长期价值：</strong>
-                    <strong data-lang="en">✅ Long-Term Value:</strong>
-                    <p data-lang="zh-MY">这不是租赁，您完全拥有这个系统。10 年合约结束后，您仍然享受大约 15+ 年的完全免费用电。</p>
-                    <p data-lang="en">This is ownership, not leasing. After 10 years, you still enjoy 15+ years of completely free electricity.</p>
+                    <strong data-lang="zh" class="lang-text">✅ 长期价值：</strong>
+                    <strong data-lang="en" class="lang-text hidden">✅ Long-Term Value:</strong>
+                    <strong data-lang="ms" class="lang-text hidden">✅ Nilai Jangka Panjang:</strong>
+                    <p data-lang="zh" class="lang-text">10 年合约后，您仍享受 15+ 年的完全免费用电。</p>
+                    <p data-lang="en" class="lang-text hidden">After 10 years, you still enjoy 15+ years of free electricity.</p>
+                    <p data-lang="ms" class="lang-text hidden">Selepas 10 tahun, anda masih menikmati 15+ tahun elektrik percuma.</p>
                 </div>
             </div>
         </div>
@@ -829,168 +887,256 @@
 
     <!-- ========== SUCCESS CASES ========== -->
     <section class="section" id="cases">
-        <h2 class="section-title" data-lang="zh-MY">✨ Spower 成功案例</h2>
-        <h2 class="section-title" data-lang="en">✨ Spower Success Cases</h2>
+        <h2 class="section-title">
+            <span data-lang="zh" class="lang-text">✨ 成功案例</span>
+            <span data-lang="en" class="lang-text hidden">✨ Success Cases</span>
+            <span data-lang="ms" class="lang-text hidden">✨ Kes Berjaya</span>
+        </h2>
 
         <div class="grid">
             <!-- Case 1 -->
             <div class="card card-case">
-                <h3 data-lang="zh-MY">案例 1：Sungai Petani 项目</h3>
-                <h3 data-lang="en">Case 1: Sungai Petani Project</h3>
-                <div class="case-image" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏢</div>
-                <p data-lang="zh-MY"><strong>项目类型：</strong>工业屋顶太阳能</p>
-                <p data-lang="en"><strong>Project Type:</strong> Industrial Rooftop Solar</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">案例 1：Sungai Petani</span>
+                    <span data-lang="en" class="lang-text hidden">Case 1: Sungai Petani</span>
+                    <span data-lang="ms" class="lang-text hidden">Kes 1: Sungai Petani</span>
+                </h3>
+                <div class="case-image" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">🏢</div>
+                <p>
+                    <span data-lang="zh" class="lang-text"><strong>类型：</strong>工业屋顶</span>
+                    <span data-lang="en" class="lang-text hidden"><strong>Type:</strong> Industrial Rooftop</span>
+                    <span data-lang="ms" class="lang-text hidden"><strong>Jenis:</strong> Atap Industri</span>
+                </p>
                 <div class="case-info">
-                    <div class="case-kw" data-lang="zh-MY">28.40 kWp 系统</div>
-                    <div class="case-kw" data-lang="en">28.40 kWp System</div>
-                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM1,600</div>
-                    <div class="case-save" data-lang="en">💰 Save RM1,600/month</div>
+                    <div class="case-kw">28.40 kWp</div>
+                    <div class="case-save" data-lang="zh" class="lang-text">💰 月省 RM1,600</div>
+                    <div class="case-save" data-lang="en" class="lang-text hidden">💰 Save RM1,600/month</div>
+                    <div class="case-save" data-lang="ms" class="lang-text hidden">💰 Jimat RM1,600/bulan</div>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM19,200</p>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM19,200</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">
+                    <span data-lang="zh" class="lang-text">✅ 已投运 | ✅ 年省 RM19,200</span>
+                    <span data-lang="en" class="lang-text hidden">✅ Operational | ✅ Annual Savings RM19,200</span>
+                    <span data-lang="ms" class="lang-text hidden">✅ Operasi | ✅ Jimat Tahunan RM19,200</span>
+                </p>
             </div>
 
             <!-- Case 2 -->
             <div class="card card-case">
-                <h3 data-lang="zh-MY">案例 2：Alor Setar 项目（墙面）</h3>
-                <h3 data-lang="en">Case 2: Alor Setar Project (Wall)</h3>
-                <div class="case-image" style="background: linear-gradient(135deg, #f97316, #fb923c); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏭</div>
-                <p data-lang="zh-MY"><strong>项目类型：</strong>商业建筑墙面太阳能</p>
-                <p data-lang="en"><strong>Project Type:</strong> Commercial Wall Solar</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">案例 2：Alor Setar（墙面）</span>
+                    <span data-lang="en" class="lang-text hidden">Case 2: Alor Setar (Wall)</span>
+                    <span data-lang="ms" class="lang-text hidden">Kes 2: Alor Setar (Dinding)</span>
+                </h3>
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxUUCAMEA9UH9RYSExoTExoaFhcWGBsbHh4eHiMiHyImIjUkJCYkODg4OD8AAAIDAQEC" alt="Alor Setar Wall Project" class="case-image" style="object-fit: cover;">
+                <p>
+                    <span data-lang="zh" class="lang-text"><strong>类型：</strong>商业墙面</span>
+                    <span data-lang="en" class="lang-text hidden"><strong>Type:</strong> Commercial Wall</span>
+                    <span data-lang="ms" class="lang-text hidden"><strong>Jenis:</strong> Dinding Komersial</span>
+                </p>
                 <div class="case-info">
-                    <div class="case-kw" data-lang="zh-MY">18.46 kWp 系统</div>
-                    <div class="case-kw" data-lang="en">18.46 kWp System</div>
-                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM1,000</div>
-                    <div class="case-save" data-lang="en">💰 Save RM1,000/month</div>
+                    <div class="case-kw">18.46 kWp</div>
+                    <div class="case-save" data-lang="zh" class="lang-text">💰 月省 RM1,000</div>
+                    <div class="case-save" data-lang="en" class="lang-text hidden">💰 Save RM1,000/month</div>
+                    <div class="case-save" data-lang="ms" class="lang-text hidden">💰 Jimat RM1,000/bulan</div>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM12,000</p>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM12,000</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">
+                    <span data-lang="zh" class="lang-text">✅ 已投运 | ✅ 年省 RM12,000</span>
+                    <span data-lang="en" class="lang-text hidden">✅ Operational | ✅ Annual Savings RM12,000</span>
+                    <span data-lang="ms" class="lang-text hidden">✅ Operasi | ✅ Jimat Tahunan RM12,000</span>
+                </p>
             </div>
 
             <!-- Case 3 -->
             <div class="card card-case">
-                <h3 data-lang="zh-MY">案例 3：Alor Setar 航拍项目</h3>
-                <h3 data-lang="en">Case 3: Alor Setar Aerial Project</h3>
-                <div class="case-image" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏠</div>
-                <p data-lang="zh-MY"><strong>项目类型：</strong>混合应用（屋顶+墙面）</p>
-                <p data-lang="en"><strong>Project Type:</strong> Mixed Application (Roof + Wall)</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">案例 3：Alor Setar（航拍）</span>
+                    <span data-lang="en" class="lang-text hidden">Case 3: Alor Setar (Aerial)</span>
+                    <span data-lang="ms" class="lang-text hidden">Kes 3: Alor Setar (Udara)</span>
+                </h3>
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxUUCAMEA9UH9RYSExoTExoaFhcWGBsbHh4eHiMiHyImIjUkJCYkODg4OD8AAAIDAQEC" alt="Alor Setar Aerial Project" class="case-image" style="object-fit: cover;">
+                <p>
+                    <span data-lang="zh" class="lang-text"><strong>类型：</strong>屋顶+墙面</span>
+                    <span data-lang="en" class="lang-text hidden"><strong>Type:</strong> Roof + Wall</span>
+                    <span data-lang="ms" class="lang-text hidden"><strong>Jenis:</strong> Atap + Dinding</span>
+                </p>
                 <div class="case-info">
-                    <div class="case-kw" data-lang="zh-MY">12.78 kWp 系统</div>
-                    <div class="case-kw" data-lang="en">12.78 kWp System</div>
-                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM700</div>
-                    <div class="case-save" data-lang="en">💰 Save RM700/month</div>
+                    <div class="case-kw">12.78 kWp</div>
+                    <div class="case-save" data-lang="zh" class="lang-text">💰 月省 RM700</div>
+                    <div class="case-save" data-lang="en" class="lang-text hidden">💰 Save RM700/month</div>
+                    <div class="case-save" data-lang="ms" class="lang-text hidden">💰 Jimat RM700/bulan</div>
                 </div>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM8,400</p>
-                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM8,400</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;">
+                    <span data-lang="zh" class="lang-text">✅ 已投运 | ✅ 年省 RM8,400</span>
+                    <span data-lang="en" class="lang-text hidden">✅ Operational | ✅ Annual Savings RM8,400</span>
+                    <span data-lang="ms" class="lang-text hidden">✅ Operasi | ✅ Jimat Tahunan RM8,400</span>
+                </p>
             </div>
         </div>
 
         <div class="stats">
             <div class="stat-card">
                 <div class="stat-number">59+</div>
-                <div class="stat-label" data-lang="zh-MY">完成项目</div>
-                <div class="stat-label" data-lang="en">Completed Projects</div>
+                <div class="stat-label">
+                    <span data-lang="zh" class="lang-text">完成项目</span>
+                    <span data-lang="en" class="lang-text hidden">Completed Projects</span>
+                    <span data-lang="ms" class="lang-text hidden">Projek Selesai</span>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">500+ kW</div>
-                <div class="stat-label" data-lang="zh-MY">已安装容量</div>
-                <div class="stat-label" data-lang="en">Installed Capacity</div>
+                <div class="stat-label">
+                    <span data-lang="zh" class="lang-text">已安装容量</span>
+                    <span data-lang="en" class="lang-text hidden">Installed Capacity</span>
+                    <span data-lang="ms" class="lang-text hidden">Kapasiti Terpasang</span>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">RM 800k+</div>
-                <div class="stat-label" data-lang="zh-MY">客户年度节省</div>
-                <div class="stat-label" data-lang="en">Annual Customer Savings</div>
+                <div class="stat-label">
+                    <span data-lang="zh" class="lang-text">年度节省</span>
+                    <span data-lang="en" class="lang-text hidden">Annual Savings</span>
+                    <span data-lang="ms" class="lang-text hidden">Jimat Tahunan</span>
+                </div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">98%</div>
-                <div class="stat-label" data-lang="zh-MY">客户满意度</div>
-                <div class="stat-label" data-lang="en">Customer Satisfaction</div>
+                <div class="stat-label">
+                    <span data-lang="zh" class="lang-text">满意度</span>
+                    <span data-lang="en" class="lang-text hidden">Satisfaction</span>
+                    <span data-lang="ms" class="lang-text hidden">Kepuasan</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ========== FAQ ========== -->
     <section class="section" id="faq">
-        <h2 class="section-title" data-lang="zh-MY">❓ 常见问答</h2>
-        <h2 class="section-title" data-lang="en">❓ Frequently Asked Questions</h2>
+        <h2 class="section-title">
+            <span data-lang="zh" class="lang-text">❓ 常见问答</span>
+            <span data-lang="en" class="lang-text hidden">❓ FAQ</span>
+            <span data-lang="ms" class="lang-text hidden">❓ Soalan Lazim</span>
+        </h2>
 
         <div class="grid">
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 我的房屋面积很小，适合装太阳能吗？</h3>
-                <h3 data-lang="en">Q: Is solar suitable for small houses?</h3>
-                <p data-lang="zh-MY">A: 通过精准的 Right-Sizing 规划，即使小面积住宅也可以获得良好的 ROI。建议先进行屋顶勘察与用电分析。Spower 提供免费的专业评估。</p>
-                <p data-lang="en">A: Through precise Right-Sizing planning, even small homes can achieve good ROI. We recommend free roof assessment and electricity analysis first. Spower provides professional evaluation at no cost.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 小房子适合装太阳能吗？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: Is solar suitable for small houses?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Adakah solar sesuai untuk rumah kecil?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 适合。通过精准规划，小面积住宅也能获得良好的 ROI。建议先进行免费评估。</p>
+                <p data-lang="en" class="lang-text hidden">A: Yes. Through precise planning, small homes can achieve good ROI. We offer free assessment.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Ya. Melalui perancangan tepat, rumah kecil boleh dapat ROI baik. Kami tawarkan penilaian percuma.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 系统投运后多久能申请 SuRIA Home 回扣？</h3>
-                <h3 data-lang="en">Q: When can I apply for SuRIA Home rebate after installation?</h3>
-                <p data-lang="zh-MY">A: 通常系统成功投运并在 TNB 系统注册后即可申请，具体时间请咨询您的安装商或 TNB 客服。Spower 提供全程协助。</p>
-                <p data-lang="en">A: Usually after system is operational and registered in TNB system. Contact your installer or TNB customer service for specifics. Spower assists throughout the process.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 多久能申请回扣？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: When can I apply for rebate?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Bilakah saya boleh mohon rebat?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 通常系统投运并注册后即可申请。我们提供全程协助。</p>
+                <p data-lang="en" class="lang-text hidden">A: Usually after system is operational and registered. We assist throughout the process.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Biasanya selepas sistem beroperasi dan didaftarkan. Kami membantu sepanjang proses.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 下雨天或晚上有发电吗？</h3>
-                <h3 data-lang="en">Q: Does it generate electricity on rainy days or at night?</h3>
-                <p data-lang="zh-MY">A: 太阳能板在阴天会有少量发电，但效率大幅下降（约 10-25%）。晚上无法发电，此时需从电网供电。</p>
-                <p data-lang="en">A: Solar panels generate minimal power on cloudy days (10-25% efficiency). They don't generate at night; you draw from the grid. We design systems accounting for this.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 下雨天或晚上有发电吗？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: Does it generate at night or rainy days?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Adakah ia menjana pada malam atau hari hujan?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 阴天有少量发电（10-25%）。晚上无法发电，需从电网供电。</p>
+                <p data-lang="en" class="lang-text hidden">A: Cloudy days generate minimal power (10-25%). No generation at night; grid provides power.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Hari mendung menjana kuasa minimal (10-25%). Tiada penjanaan pada malam; grid membekalkan.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 太阳能系统需要维护吗？</h3>
-                <h3 data-lang="en">Q: Does the solar system need maintenance?</h3>
-                <p data-lang="zh-MY">A: 建议 1-3 年清洁一次面板（如果很脏）。大多数系统故障率很低，质保通常为 10-25 年。Spower 提供售后维护服务。</p>
-                <p data-lang="en">A: Clean panels every 1-3 years if very dirty. Most systems have low failure rates with 10-25 year warranties. Spower offers after-sales maintenance.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 需要维护吗？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: Does it need maintenance?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Adakah ia memerlukan penyelenggaraan?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 建议 1-3 年清洁一次面板。大多系统故障率低，质保 10-25 年。我们提供维护服务。</p>
+                <p data-lang="en" class="lang-text hidden">A: Clean panels every 1-3 years. Low failure rates with 10-25 year warranties. We offer maintenance.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Bersihkan panel setiap 1-3 tahun. Kadar kegagalan rendah dengan jaminan 10-25 tahun. Kami tawarkan penyelenggaraan.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 安装需要多长时间？</h3>
-                <h3 data-lang="en">Q: How long does installation take?</h3>
-                <p data-lang="zh-MY">A: 一般 2-4 周（包括勘察、设计、采购、安装、并网审批）。紧急情况下可加快。Spower 项目经理全程跟踪。</p>
-                <p data-lang="en">A: Typically 2-4 weeks (including survey, design, procurement, installation, grid approval). Can be expedited if needed. Spower project manager tracks throughout.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 安装需要多久？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: How long for installation?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Berapa lama untuk pemasangan?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 通常 2-4 周。我们项目经理全程跟踪，确保及时完成。</p>
+                <p data-lang="en" class="lang-text hidden">A: Typically 2-4 weeks. Our project manager tracks everything for timely completion.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Biasanya 2-4 minggu. Pengurus projek kami mengesan semuanya untuk penyiapan tepat masa.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 我可以获得多少电费折扣？</h3>
-                <h3 data-lang="en">Q: How much can I save on electricity bills?</h3>
-                <p data-lang="zh-MY">A: 取决于您的系统容量、地理位置和用电习惯。一般可节省 50-90% 电费。Spower 提供免费计算器帮您估算。</p>
-                <p data-lang="en">A: Depends on system size, location, and usage habits. Typically 50-90% savings. Spower provides free calculator to estimate your savings.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 能省多少电费？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: How much can I save?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Berapa banyak saya boleh jimat?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 一般 50-90%，取决于系统容量和用电习惯。我们提供免费计算。</p>
+                <p data-lang="en" class="lang-text hidden">A: Typically 50-90%, depending on system size and habits. We provide free estimate.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Biasanya 50-90%, bergantung pada saiz sistem dan tabiat. Kami berikan anggaran percuma.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 如果我要搬家怎么办？</h3>
-                <h3 data-lang="en">Q: What if I move?</h3>
-                <p data-lang="zh-MY">A: 系统属于您，可以继续留在原房产并转让给新业主。或者联系 TNB 办理系统转移。Spower 可提供协助。</p>
-                <p data-lang="en">A: The system is yours. You can leave it with the property and transfer ownership to new owner, or contact TNB for system transfer. Spower can assist.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 搬家怎么办？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: What if I move?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Bagaimana jika saya pindah?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 系统属于您，可转让给新业主。我们提供协助。</p>
+                <p data-lang="en" class="lang-text hidden">A: System is yours. You can transfer ownership to new owner. We assist.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Sistem adalah milik anda. Anda boleh pindahkan kepemilikan ke pemilik baru. Kami membantu.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: Spower 提供什么服务？</h3>
-                <h3 data-lang="en">Q: What services does Spower provide?</h3>
-                <p data-lang="zh-MY">A: 一站式服务包括：屋顶评估 → 系统设计 → 采购安装 → TNB 换表 → SEDA 申请 → 售后维护。我们处理所有技术和行政事务。</p>
-                <p data-lang="en">A: One-stop service: roof assessment → system design → procurement & installation → TNB meter upgrade → SEDA application → after-sales support. We handle everything.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: Spower 提供什么？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: What does Spower provide?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Apa yang disediakan Spower?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 一站式服务：评估→设计→安装→并网→申请→维护。我们处理所有事务。</p>
+                <p data-lang="en" class="lang-text hidden">A: One-stop service: assessment → design → installation → grid connection → application → maintenance.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Perkhidmatan satu henti: penilaian → reka bentuk → pemasangan → sambungan grid → permohonan → penyelenggaraan.</p>
             </div>
 
             <div class="card">
-                <h3 data-lang="zh-MY">Q: 费用是多少？</h3>
-                <h3 data-lang="en">Q: What's the cost?</h3>
-                <p data-lang="zh-MY">A: 系统成本取决于容量和质量。一般每 kW 成本 RM3,000-5,000。加上 RM3,000 回扣后，投资回报率通常 3-4 年。免费咨询获取详细报价。</p>
-                <p data-lang="en">A: System cost depends on capacity and quality. Typically RM3,000-5,000 per kW. With RM3,000 rebate, ROI usually 3-4 years. Free consultation for detailed quotes.</p>
+                <h3>
+                    <span data-lang="zh" class="lang-text">Q: 费用多少？</span>
+                    <span data-lang="en" class="lang-text hidden">Q: What's the cost?</span>
+                    <span data-lang="ms" class="lang-text hidden">Q: Berapa kos?</span>
+                </h3>
+                <p data-lang="zh" class="lang-text">A: 一般每 kW 成本 RM3,000-5,000。加上 RM3,000 回扣，ROI 通常 3-4 年。免费咨询获得报价。</p>
+                <p data-lang="en" class="lang-text hidden">A: Typically RM3,000-5,000 per kW. With RM3,000 rebate, ROI usually 3-4 years. Free consultation for quotes.</p>
+                <p data-lang="ms" class="lang-text hidden">A: Biasanya RM3,000-5,000 setiap kW. Dengan rebat RM3,000, ROI biasanya 3-4 tahun. Konsultasi percuma untuk sebut harga.</p>
             </div>
         </div>
     </section>
 
     <!-- ========== CTA SECTION ========== -->
     <section class="section" style="text-align: center; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(59,130,246,0.05) 100%); padding: 3rem 1.5rem; border-radius: 12px; margin-bottom: 4rem;">
-        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;" data-lang="zh-MY">🎯 准备开始了吗？</h2>
-        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;" data-lang="en">🎯 Ready to Get Started?</h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">
+            <span data-lang="zh" class="lang-text">🎯 准备开始了吗？</span>
+            <span data-lang="en" class="lang-text hidden">🎯 Ready to Get Started?</span>
+            <span data-lang="ms" class="lang-text hidden">🎯 Sedia untuk Memulai?</span>
+        </h2>
         
-        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-lang="zh-MY">现在就联络 Spower Solar，获取免费的屋顶评估和系统设计。我们将帮您最大化 SuRIA Home 回扣和 ATAP 收益。</p>
-        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-lang="en">Contact Spower Solar now for free roof assessment and system design. We'll maximize your SuRIA Home rebate and ATAP benefits.</p>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <span data-lang="zh" class="lang-text">现在就联络 Spower，获取免费屋顶评估和系统设计。</span>
+            <span data-lang="en" class="lang-text hidden">Contact Spower now for free roof assessment and system design.</span>
+            <span data-lang="ms" class="lang-text hidden">Hubungi Spower sekarang untuk penilaian atap percuma dan reka bentuk sistem.</span>
+        </p>
         
-        <a href="https://wa.me/60123456789?text=你好，我想咨询SuRIA%20Home和ATAP太阳能方案" class="btn btn-primary" style="display: inline-block;" target="_blank">
-            <span data-lang="zh-MY">💬 免费咨询 (WhatsApp)</span>
-            <span data-lang="en">💬 Free Consultation (WhatsApp)</span>
+        <a href="https://wa.me/60123456789?text=Hello%20Spower%20Solar" class="btn btn-primary" style="display: inline-block;" target="_blank">
+            <span data-lang="zh" class="lang-text">💬 免费咨询</span>
+            <span data-lang="en" class="lang-text hidden">💬 Free Consultation</span>
+            <span data-lang="ms" class="lang-text hidden">💬 Konsultasi Percuma</span>
         </a>
     </section>
 
@@ -998,10 +1144,11 @@
 
 <!-- ========== CTA BAR ========== -->
 <div class="cta-bar">
-    <span class="cta-text" data-lang="zh-MY">现在获取免费咨询：</span>
-    <span class="cta-text" data-lang="en">Get Free Consultation Now:</span>
-    <a href="https://wa.me/60123456789?text=你好，我想咨询SuRIA%20Home和ATAP太阳能方案" class="cta-btn" target="_blank">
-        💬 <span data-lang="zh-MY">WhatsApp 我们</span><span data-lang="en">WhatsApp Us</span>
+    <a href="https://wa.me/60123456789?text=Hello%20Spower%20Solar" class="cta-btn" target="_blank">
+        💬 
+        <span data-lang="zh" class="lang-text">WhatsApp 我们</span>
+        <span data-lang="en" class="lang-text hidden">WhatsApp Us</span>
+        <span data-lang="ms" class="lang-text hidden">WhatsApp Kami</span>
     </a>
 </div>
 
@@ -1010,84 +1157,126 @@
     <div class="footer-content">
         <div class="footer-section">
             <h4>Spower Solar Energy</h4>
-            <p data-lang="zh-MY">马来西亚领先的太阳能解决方案提供商</p>
-            <p data-lang="en">Malaysia's Leading Solar Energy Solutions Provider</p>
-            <p style="margin-top: 1rem; font-size: 0.8rem;">© 2026 Spower Solar Energy. <span data-lang="zh-MY">版权所有</span><span data-lang="en">All Rights Reserved</span></p>
+            <p data-lang="zh" class="lang-text">马来西亚领先的太阳能解决方案提供商</p>
+            <p data-lang="en" class="lang-text hidden">Malaysia's Leading Solar Energy Solutions Provider</p>
+            <p data-lang="ms" class="lang-text hidden">Pembekal Penyelesaian Tenaga Solar Terkemuka Malaysia</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">© 2026 Spower Solar Energy</p>
         </div>
         
         <div class="footer-section">
-            <h4 data-lang="zh-MY">快速链接</h4>
-            <h4 data-lang="en">Quick Links</h4>
-            <a href="#suria" data-lang="zh-MY">SuRIA Home 计划</a>
-            <a href="#suria" data-lang="en">SuRIA Home Program</a><br>
-            <a href="#atap" data-lang="zh-MY">Solar ATAP 机制</a>
-            <a href="#atap" data-lang="en">Solar ATAP Framework</a><br>
-            <a href="#cases" data-lang="zh-MY">成功案例</a>
-            <a href="#cases" data-lang="en">Success Cases</a><br>
-            <a href="#faq" data-lang="zh-MY">常见问答</a>
-            <a href="#faq" data-lang="en">FAQ</a>
+            <h4>
+                <span data-lang="zh" class="lang-text">快速链接</span>
+                <span data-lang="en" class="lang-text hidden">Quick Links</span>
+                <span data-lang="ms" class="lang-text hidden">Pautan Cepat</span>
+            </h4>
+            <a href="#suria" data-lang="zh" class="lang-text">SuRIA Home</a>
+            <a href="#suria" data-lang="en" class="lang-text hidden">SuRIA Home</a>
+            <a href="#suria" data-lang="ms" class="lang-text hidden">SuRIA Home</a><br>
+            
+            <a href="#atap" data-lang="zh" class="lang-text">Solar ATAP</a>
+            <a href="#atap" data-lang="en" class="lang-text hidden">Solar ATAP</a>
+            <a href="#atap" data-lang="ms" class="lang-text hidden">Solar ATAP</a><br>
+            
+            <a href="#cases" data-lang="zh" class="lang-text">成功案例</a>
+            <a href="#cases" data-lang="en" class="lang-text hidden">Cases</a>
+            <a href="#cases" data-lang="ms" class="lang-text hidden">Kes</a><br>
+            
+            <a href="#faq" data-lang="zh" class="lang-text">常见问答</a>
+            <a href="#faq" data-lang="en" class="lang-text hidden">FAQ</a>
+            <a href="#faq" data-lang="ms" class="lang-text hidden">Soalan Lazim</a>
         </div>
         
         <div class="footer-section">
-            <h4 data-lang="zh-MY">官方链接</h4>
-            <h4 data-lang="en">Official Links</h4>
+            <h4>
+                <span data-lang="zh" class="lang-text">官方链接</span>
+                <span data-lang="en" class="lang-text hidden">Official Links</span>
+                <span data-lang="ms" class="lang-text hidden">Pautan Rasmi</span>
+            </h4>
             <a href="https://seda.gov.my" target="_blank">SEDA Malaysia</a><br>
-            <a href="https://www.tnb.com.my" target="_blank">TNB (国能)</a><br>
-            <a href="https://www.st.gov.my" target="_blank" data-lang="zh-MY">能源与天然资源部</a>
-            <a href="https://www.st.gov.my" target="_blank" data-lang="en">Ministry of Energy</a>
+            <a href="https://www.tnb.com.my" target="_blank">TNB</a><br>
+            <a href="https://www.st.gov.my" target="_blank">
+                <span data-lang="zh" class="lang-text">能源部</span>
+                <span data-lang="en" class="lang-text hidden">Ministry of Energy</span>
+                <span data-lang="ms" class="lang-text hidden">Kementerian Tenaga</span>
+            </a>
         </div>
         
         <div class="footer-section">
-            <h4 data-lang="zh-MY">联系我们</h4>
-            <h4 data-lang="en">Contact Us</h4>
+            <h4>
+                <span data-lang="zh" class="lang-text">联系我们</span>
+                <span data-lang="en" class="lang-text hidden">Contact Us</span>
+                <span data-lang="ms" class="lang-text hidden">Hubungi Kami</span>
+            </h4>
             <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
             <p>📧 Email: <a href="mailto:info@spowersolar.com.my">info@spowersolar.com.my</a></p>
-            <p data-lang="zh-MY">⏰ 营业时间：周一至周日 9:00 AM - 6:00 PM</p>
-            <p data-lang="en">⏰ Hours: Mon-Sun 9:00 AM - 6:00 PM</p>
+            <p>
+                <span data-lang="zh" class="lang-text">⏰ 营业时间：周一至周日 9:00-18:00</span>
+                <span data-lang="en" class="lang-text hidden">⏰ Hours: Mon-Sun 9:00 AM-6:00 PM</span>
+                <span data-lang="ms" class="lang-text hidden">⏰ Jam: Isnin-Ahad 9:00 PG-6:00 PTG</span>
+            </p>
         </div>
     </div>
     
     <div class="footer-bottom">
-        <p data-lang="zh-MY">本网站为信息平台，由 Spower Solar Energy 提供。所有信息基于官方政策，仅供参考。最新政策请查阅官方渠道。</p>
-        <p data-lang="en">This website is an information platform provided by Spower Solar Energy. All information based on official policies for reference only. Check official channels for latest updates.</p>
-        <p style="margin-top: 1rem;">
-            <a href="#" style="color: #64748b;" data-lang="zh-MY">隐私政策</a>
-            <a href="#" style="color: #64748b;" data-lang="en">Privacy Policy</a>
-            | 
-            <a href="#" style="color: #64748b;" data-lang="zh-MY">服务条款</a>
-            <a href="#" style="color: #64748b;" data-lang="en">Terms of Service</a>
+        <p>
+            <span data-lang="zh" class="lang-text">本网站为信息平台，所有信息基于官方政策，仅供参考。</span>
+            <span data-lang="en" class="lang-text hidden">This website is an information platform. All information based on official policies for reference only.</span>
+            <span data-lang="ms" class="lang-text hidden">Laman web ini ialah platform maklumat. Semua maklumat berdasarkan dasar rasmi untuk rujukan sahaja.</span>
         </p>
     </div>
 </footer>
 
 <!-- ========== LANGUAGE SWITCHING SCRIPT ========== -->
 <script>
-function switchLanguage(lang) {
-    // Update button states
-    document.querySelectorAll('.lang-toggle').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
+// 获取用户首选语言
+function getPreferredLanguage() {
+    const saved = localStorage.getItem('preferredLanguage');
+    if (saved) return saved;
     
-    // Update body class
-    if (lang === 'en') {
-        document.body.classList.add('en');
-    } else {
-        document.body.classList.remove('en');
-    }
+    const browserLang = navigator.language || navigator.userLanguage;
+    console.log('浏览器语言:', browserLang);
     
-    // Save preference
-    localStorage.setItem('preferredLanguage', lang);
+    if (browserLang.startsWith('zh')) return 'zh';
+    if (browserLang.startsWith('ms')) return 'ms';
+    if (browserLang.startsWith('en')) return 'en';
+    
+    return 'zh'; // 默认语言
 }
 
-// Load saved preference on page load
+function switchLanguage(lang) {
+    // 隐藏所有语言内容
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        el.classList.add('hidden');
+        el.style.display = 'none';
+    });
+    
+    // 显示选中语言
+    document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+        el.classList.remove('hidden');
+        el.style.display = 'inline';
+    });
+    
+    // 确保块级元素
+    document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+        if (el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'P' || el.tagName === 'DIV' || el.tagName === 'LI') {
+            el.style.display = 'block';
+        }
+    });
+    
+    // 更新 selector
+    document.getElementById('langSelector').value = lang;
+    
+    // 保存偏好
+    localStorage.setItem('preferredLanguage', lang);
+    
+    console.log('语言已切换为:', lang);
+}
+
+// 页面加载时设置语言
 document.addEventListener('DOMContentLoaded', function() {
-    const savedLang = localStorage.getItem('preferredLanguage') || 'zh-MY';
-    if (savedLang === 'en') {
-        document.body.classList.add('en');
-        document.querySelector('.lang-toggle[onclick*="en"]').classList.add('active');
-        document.querySelector('.lang-toggle[onclick*="zh-MY"]').classList.remove('active');
-    }
+    const lang = getPreferredLanguage();
+    console.log('应用语言:', lang);
+    switchLanguage(lang);
 });
 </script>
 
