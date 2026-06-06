@@ -134,6 +134,7 @@ nav a:hover{color:var(--g);}
 .story-row-val{font-size:0.95rem;font-weight:600;color:var(--t1);}
 .story-row-val strong{color:var(--g);}
 @media(max-width:768px){.story{grid-template-columns:1fr;gap:2rem;}.story-left{position:static;}}
+        @media(max-width:640px){.info-story-grid{grid-template-columns:1fr!important;}}
 
 /* OFFICIAL CARD — Magazine full bleed */
 .off-card{border-radius:20px;overflow:hidden;margin:2.5rem 0;}
@@ -532,7 +533,7 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
             <!-- Decorative circles -->
             <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(16,185,129,0.06);top:-60px;right:-60px;pointer-events:none;"></div>
             <div style="position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(16,185,129,0.05);bottom:-30px;left:-30px;pointer-events:none;"></div>
-            <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;">
+            <div class="info-story-grid" style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start;">
                 <div>
                     <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--g);margin-bottom:0.5rem;"><span data-lang="zh" class="lang-text">一目了然</span><span data-lang="en" class="lang-text hidden">At A Glance</span><span data-lang="ms" class="lang-text hidden">Sekilas Pandang</span></div>
                     <div style="font-size:1.3rem;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:0.8rem;"><span data-lang="zh" class="lang-text">关键资讯</span><span data-lang="en" class="lang-text hidden">Key Info</span><span data-lang="ms" class="lang-text hidden">Maklumat Utama</span></div>
@@ -570,7 +571,6 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
                 </div>
             </div>
         </div>
-        @media(max-width:768px){.suria-info-grid{grid-template-columns:1fr!important;gap:1.5rem!important;}}
 
         <!-- Report style story layout -->
         <div class="story" style="margin-top:3rem;">
@@ -675,7 +675,7 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
         <div style="margin:2.5rem 0;background:linear-gradient(135deg,#eff6ff 0%,#f8fafc 100%);border-radius:20px;padding:2.5rem;position:relative;overflow:hidden;" class="reveal">
             <div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(59,130,246,0.06);top:-60px;right:-60px;pointer-events:none;"></div>
             <div style="position:absolute;width:120px;height:120px;border-radius:50%;background:rgba(59,130,246,0.04);bottom:-30px;left:-30px;pointer-events:none;"></div>
-            <div style="display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start;">
+            <div class="info-story-grid" style="display:grid;grid-template-columns:1fr 2fr;gap:2rem;align-items:start;">
                 <div>
                     <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#3b82f6;margin-bottom:0.5rem;"><span data-lang="zh" class="lang-text">了解更多</span><span data-lang="en" class="lang-text hidden">Know More</span><span data-lang="ms" class="lang-text hidden">Ketahui Lebih</span></div>
                     <div style="font-size:1.3rem;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:0.8rem;"><span data-lang="zh" class="lang-text">规则与权益</span><span data-lang="en" class="lang-text hidden">Rules & Rights</span><span data-lang="ms" class="lang-text hidden">Peraturan & Hak</span></div>
