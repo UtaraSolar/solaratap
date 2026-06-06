@@ -54,8 +54,8 @@ header.scrolled nav a{color:var(--t2);}
 header.scrolled nav a:hover{color:var(--g);}
 .hd{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;}
 .logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;}
-.logo img{height:38px;width:auto;transition:height 0.3s;}
-header.scrolled .logo img{height:32px;}
+.logo img{height:44px;width:auto;transition:height 0.3s;}
+header.scrolled .logo img{height:36px;}
 .logo-text{font-size:1.1rem;font-weight:800;color:white;display:none;}
 nav{display:flex;gap:1.5rem;}
 nav a{font-size:0.82rem;font-weight:600;color:#64748b;text-decoration:none;transition:color 0.2s;letter-spacing:0.03em;}
@@ -1245,15 +1245,36 @@ footer{background:#000;border-top:1px solid #0a0a0a;padding:3rem 1.5rem 1.5rem;}
     </div>
 </section>
 
-<!-- STICKY BOTTOM CTA (mobile) -->
-<div id="stickyCta" style="position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid #e2e8f0;padding:0.8rem 1.2rem;display:none;justify-content:space-between;align-items:center;z-index:190;box-shadow:0 -4px 20px rgba(0,0,0,0.08);">
-    <div>
-        <div style="font-size:0.78rem;font-weight:700;color:var(--t1);"><span data-lang="zh" class="lang-text">免费屋顶评估</span><span data-lang="en" class="lang-text hidden">Free Roof Assessment</span><span data-lang="ms" class="lang-text hidden">Penilaian Percuma</span></div>
-        <div style="font-size:0.7rem;color:var(--t3);"><span data-lang="zh" class="lang-text">今天咨询，配额有限</span><span data-lang="en" class="lang-text hidden">Consult today, quota limited</span><span data-lang="ms" class="lang-text hidden">Konsultasi hari ini, kuota terhad</span></div>
+<!-- WA CHAT POPUP -->
+<div id="waChatPopup" style="position:fixed;bottom:5.5rem;left:1rem;z-index:998;opacity:0;transform:translateY(10px) scale(0.95);transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);pointer-events:none;max-width:260px;">
+    <div style="background:white;border-radius:16px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,0.15);border:1px solid #e2e8f0;position:relative;">
+        <!-- Triangle pointer -->
+        <div style="position:absolute;bottom:-8px;left:20px;width:16px;height:8px;overflow:hidden;">
+            <div style="width:12px;height:12px;background:white;border-right:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;transform:rotate(45deg);margin:-6px 0 0 2px;"></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:0.7rem;margin-bottom:0.8rem;">
+            <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                <svg viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.516a.75.75 0 00.927.927l5.668-1.471A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.718 9.718 0 01-4.964-1.358l-.356-.213-3.693.958.978-3.591-.232-.369A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+            </div>
+            <div>
+                <div style="font-size:0.78rem;font-weight:700;color:var(--t1);margin-bottom:0.2rem;">Spower Solar</div>
+                <div style="font-size:0.75rem;color:var(--t2);line-height:1.5;">
+                    <span data-lang="zh" class="lang-text">👋 你好！想了解 SuRIA Home 回扣或免费屋顶评估？</span>
+                    <span data-lang="en" class="lang-text hidden">👋 Hi! Interested in SuRIA Home rebate or free roof assessment?</span>
+                    <span data-lang="ms" class="lang-text hidden">👋 Hai! Berminat dengan rebat SuRIA Home atau penilaian bumbung percuma?</span>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-direction:column;">
+            <a href="https://wa.me/60164017123?text=Hello%20Spower%2C%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20SuRIA%20Home%20rebate" target="_blank" style="background:linear-gradient(135deg,#25d366,#128c7e);color:white;text-decoration:none;padding:0.55rem 1rem;border-radius:8px;font-size:0.78rem;font-weight:700;text-align:center;display:block;">
+                💬 <span data-lang="zh" class="lang-text">免费咨询 SuRIA Home</span><span data-lang="en" class="lang-text hidden">Free SuRIA Home Consult</span><span data-lang="ms" class="lang-text hidden">Konsultasi SuRIA Home Percuma</span>
+            </a>
+            <a href="https://wa.me/60164017123?text=Hello%20Spower%2C%20saya%20ingin%20penilaian%20bumbung%20percuma" target="_blank" style="background:white;color:var(--g);text-decoration:none;padding:0.5rem 1rem;border-radius:8px;font-size:0.78rem;font-weight:700;text-align:center;display:block;border:1px solid var(--gl);">
+                🏠 <span data-lang="zh" class="lang-text">预约免费屋顶评估</span><span data-lang="en" class="lang-text hidden">Book Free Roof Assessment</span><span data-lang="ms" class="lang-text hidden">Tempah Penilaian Bumbung</span>
+            </a>
+        </div>
+        <button onclick="dismissPopup()" style="position:absolute;top:0.5rem;right:0.6rem;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1rem;line-height:1;padding:0.2rem;">×</button>
     </div>
-    <a href="https://wa.me/60164017123?text=Hello%20Spower%2C%20I%20would%20like%20a%20free%20roof%20assessment" target="_blank" style="background:linear-gradient(135deg,#25d366,#128c7e);color:white;text-decoration:none;padding:0.6rem 1.2rem;border-radius:99px;font-size:0.82rem;font-weight:700;white-space:nowrap;">
-        💬 <span data-lang="zh" class="lang-text">立刻咨询</span><span data-lang="en" class="lang-text hidden">Chat Now</span><span data-lang="ms" class="lang-text hidden">Chat Sekarang</span>
-    </a>
 </div>
 
 <!-- TRUST STATS BEFORE FAQ -->
@@ -1447,7 +1468,11 @@ function animateQuotaBar() {
     if(!bar) return;
     setTimeout(() => {
         bar.style.width = usedPct + '%';
-        if(pctEl) pctEl.textContent = usedPct + '%  已申请';
+        if(pctEl) {
+            const lang = localStorage.getItem('lang') || 'zh';
+            const pctText = lang === 'zh' ? usedPct + '%  已申请' : lang === 'ms' ? usedPct + '%  Telah Dimohon' : usedPct + '%  Applied';
+            pctEl.textContent = pctText;
+        }
         if(usedEl) {
             let count = 0;
             const target = usedSlots;
@@ -1465,19 +1490,54 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(animateQuotaBar, 500);
 });
 
-// STICKY CTA
+// WA POPUP — show at key scroll points, dismiss on click X
+let popupDismissed = false;
+let popupShownAt = [];
+
+function showPopup() {
+    if(popupDismissed) return;
+    const popup = document.getElementById('waChatPopup');
+    if(!popup) return;
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateY(0) scale(1)';
+    popup.style.pointerEvents = 'all';
+    // Auto hide after 8 seconds
+    setTimeout(() => {
+        if(!popupDismissed) hidePopup();
+    }, 8000);
+}
+
+function hidePopup() {
+    const popup = document.getElementById('waChatPopup');
+    if(!popup) return;
+    popup.style.opacity = '0';
+    popup.style.transform = 'translateY(10px) scale(0.95)';
+    popup.style.pointerEvents = 'none';
+}
+
+function dismissPopup() {
+    popupDismissed = true;
+    hidePopup();
+}
+
+// Key scroll trigger points (% of page)
+const popupTriggers = [0.25, 0.55, 0.80];
+
 function updateStickyCta() {
-    const cta = document.getElementById('stickyCta');
+    // No sticky CTA anymore — just control WA popup
+    const pct = window.scrollY/(document.body.scrollHeight-window.innerHeight);
+    // Check triggers
+    popupTriggers.forEach(trigger => {
+        if(pct >= trigger && !popupShownAt.includes(trigger)) {
+            popupShownAt.push(trigger);
+            showPopup();
+        }
+    });
+    // Move WA and back-top normally
     const backTop = document.getElementById('backTop');
     const waBtn = document.getElementById('waBtn');
-    if(!cta) return;
-    const pct = window.scrollY/(document.body.scrollHeight-window.innerHeight);
-    const nearFooter = window.scrollY+window.innerHeight > document.body.scrollHeight-300;
-    const show = pct>0.3 && !nearFooter;
-    cta.style.display = show ? 'flex' : 'none';
-    // Move back-top and WA up when sticky CTA is visible
-    if(backTop) backTop.style.bottom = show ? '5.5rem' : '1.8rem';
-    if(waBtn) waBtn.style.bottom = show ? '5rem' : '1.8rem';
+    if(backTop) backTop.style.bottom = '1.8rem';
+    if(waBtn) waBtn.style.bottom = '1.8rem';
 }
 
 window.addEventListener('scroll', () => {
