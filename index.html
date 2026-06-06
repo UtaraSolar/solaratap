@@ -1,186 +1,298 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-MY">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Spower Solar Energy - 马来西亚住宅太阳能解决方案 | SuRIA Home 现金回扣与 Solar ATAP">
-    <meta name="keywords" content="太阳能,资助,马来西亚,SuRIA Home,Solar ATAP,Spower">
-    <title>Spower Solar Energy - 马来西亚太阳能资助计划</title>
+    <meta name="description" content="SuRIA Home & Solar ATAP 完整指南 - 马来西亚住宅太阳能资助政策、回扣信息、安装指南。由 Spower Solar Energy 提供。">
+    <meta name="keywords" content="SuRIA Home,Solar ATAP,太阳能,回扣,RM3000,马来西亚,TNB,SEDA,太阳能安装">
+    <meta name="author" content="Spower Solar Energy">
+    <meta property="og:title" content="SuRIA Home & Solar ATAP 完整指南">
+    <meta property="og:description" content="了解马来西亚最新太阳能政策，获取 RM3000 现金回扣">
+    <title>SuRIA Home & Solar ATAP 完整指南 | Spower Solar Energy</title>
+    
     <style>
         :root {
-            --primary: #e74c3c;      /* Spower红色 */
-            --primary-light: #ec7063;
-            --gold: #f4d03f;          /* 金色 */
-            --dark: #1a1a1a;
-            --light: #f8f9fa;
-            --text-main: #333333;
-            --text-secondary: #666666;
-            --white: #ffffff;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --text-main: #334155;
+            --text-secondary: #64748b;
+            --accent: #fbbf24;
+            --success: #10b981;
+            --warning: #ea580c;
         }
         
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
         
-        html, body {
-            height: 100%;
+        html {
+            scroll-behavior: smooth;
         }
         
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft YaHei", sans-serif; 
-            line-height: 1.6; 
-            color: var(--text-main); 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-main);
             background-color: var(--light);
+            padding-bottom: 100px;
         }
 
         /* ========== HEADER ========== */
-        header { 
-            background: var(--white); 
-            padding: 1rem 1.5rem; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 1.5rem;
             position: sticky;
             top: 0;
             z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            gap: 2rem;
         }
 
         .logo {
-            height: 50px;
-            width: auto;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 200px;
         }
 
-        .company-name {
-            font-size: 1.1rem;
-            font-weight: 700;
+        .logo::before {
+            content: "☀️";
+            font-size: 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
             color: var(--primary);
         }
 
-        .language-switch {
+        .header-right {
             display: flex;
-            gap: 0.5rem;
-            background-color: #f0f0f0;
-            padding: 0.3rem;
-            border-radius: 20px;
+            align-items: center;
+            gap: 1.5rem;
         }
 
-        .lang-btn {
+        .lang-toggle {
+            background: var(--light);
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
             padding: 0.5rem 1rem;
-            border: none;
-            background: transparent;
             cursor: pointer;
+            font-size: 0.85rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            color: var(--text-secondary);
+            color: var(--primary);
+            transition: all 0.3s;
         }
 
-        .lang-btn.active {
-            background-color: var(--primary);
-            color: var(--white);
+        .lang-toggle:hover {
+            background: var(--primary);
+            color: white;
         }
 
-        .lang-btn:hover {
-            background-color: var(--primary-light);
-            color: var(--white);
+        .lang-toggle.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .header-content { gap: 1rem; }
+            .logo { min-width: auto; }
         }
 
         /* ========== HERO ========== */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #c0392b 100%);
-            color: var(--white);
+            background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+            color: #fff;
             padding: 4rem 1.5rem;
             text-align: center;
-            border-bottom: 6px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="1200" height="600" fill="url(%23grid)" /></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            line-height: 1.2;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
 
         .hero p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
             max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-            opacity: 0.95;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        @media (max-width: 768px) {
-            header {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 2.5rem 1rem; }
             .hero h1 { font-size: 1.8rem; }
-            .hero { padding: 2rem 1rem; }
+            .hero p { font-size: 1rem; }
+            .hero-buttons { flex-direction: column; }
         }
 
         /* ========== CONTAINER ========== */
-        .container { 
-            padding: 2rem 1.5rem; 
-            max-width: 1000px; 
-            margin: 0 auto; 
+        .container {
+            padding: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        /* ========== SECTION TITLES ========== */
+        .section {
+            margin: 4rem 0;
+        }
+
         .section-title {
             font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
+            color: var(--dark);
+            margin-bottom: 3rem;
             text-align: center;
             font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
         }
 
         .section-title::after {
-            content: '';
-            flex: 1;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            max-width: 100px;
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
         }
 
         /* ========== CARDS ========== */
-        .card { 
-            background: var(--white); 
-            border-radius: 12px; 
-            padding: 2rem; 
-            margin-bottom: 2rem; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-left: 5px solid var(--primary);
-            transition: all 0.3s ease;
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            border-top: 5px solid var(--primary);
+            transition: all 0.3s;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
-        .card-title {
-            font-size: 1.4rem;
-            color: var(--primary);
+        .card-atap {
+            border-top-color: #3b82f6;
+        }
+
+        .card-case {
+            border-top-color: var(--accent);
+        }
+
+        /* ========== GRID ========== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h2 {
+            font-size: 1.5rem;
+            color: var(--dark);
             margin-bottom: 1rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .card-subtitle {
+        h3 {
             font-size: 1.1rem;
             color: var(--dark);
             margin: 1.5rem 0 0.8rem 0;
@@ -189,156 +301,135 @@
 
         .card p {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
             line-height: 1.7;
         }
 
         /* ========== LISTS ========== */
-        ul { 
-            list-style: none; 
+        ul {
+            list-style: none;
         }
 
-        li { 
-            margin-bottom: 0.8rem; 
-            padding-left: 1.8rem; 
-            position: relative; 
-            color: var(--text-secondary);
-            line-height: 1.7;
+        li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        li::before { 
-            content: "✓"; 
-            color: var(--gold); 
-            font-weight: bold; 
-            position: absolute; 
+        li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
             left: 0;
-            font-size: 1.2rem;
+            font-size: 1.1em;
         }
 
-        /* ========== HIGHLIGHT BOX ========== */
+        .card-atap li::before {
+            content: "→";
+            color: #3b82f6;
+        }
+
+        /* ========== HIGHLIGHT BOXES ========== */
         .highlight-box {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-            border-left: 5px solid var(--gold);
+            background-color: #f0fdf4;
+            border-left: 4px solid var(--primary);
             padding: 1.5rem;
             margin: 1.5rem 0;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
             font-size: 0.95rem;
             line-height: 1.7;
-            color: #856404;
         }
 
         .highlight-box strong {
-            color: var(--primary);
-            font-weight: 700;
+            color: var(--primary-dark);
         }
 
-        /* ========== WARNING BOX ========== */
         .warning-box {
-            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-            border-left: 5px solid var(--primary);
+            background-color: #fff7ed;
+            border-left: 4px solid var(--warning);
             padding: 1.5rem;
             margin: 1.5rem 0;
-            border-radius: 8px;
+            border-radius: 0 8px 8px 0;
             font-size: 0.95rem;
+            color: #c2410c;
             line-height: 1.7;
-            color: #721c24;
         }
 
         .warning-box strong {
-            color: var(--primary);
-            font-weight: 700;
+            color: #921a01;
         }
 
-        /* ========== PROJECT CARDS ========== */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .project-card {
-            background: var(--white);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: #ddd;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-info {
+        .info-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-left: 4px solid var(--primary);
             padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
         }
 
-        .project-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-stats {
-            background: linear-gradient(135deg, var(--primary) 0%, #c0392b 100%);
-            color: var(--white);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            text-align: center;
-        }
-
-        .project-stats div {
-            margin: 0.3rem 0;
+        strong {
+            color: var(--primary-dark);
             font-weight: 600;
         }
 
-        .project-power {
-            font-size: 1.3rem;
-            color: var(--gold);
+        /* ========== STATS ========== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
             font-weight: 800;
-        }
-
-        .project-savings {
-            font-size: 1.1rem;
-            color: var(--gold);
-            font-weight: 700;
-        }
-
-        /* ========== FAQ ========== */
-        .faq-item {
-            margin-bottom: 1.5rem;
-        }
-
-        .faq-question {
-            font-size: 1.05rem;
-            font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
-            cursor: pointer;
         }
 
-        .faq-answer {
+        .stat-label {
             color: var(--text-secondary);
-            padding-left: 1rem;
-            border-left: 3px solid var(--gold);
-            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ========== CASES ========== */
+        .case-image {
+            width: 100%;
+            height: 300px;
+            background: #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .case-info {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .case-kw {
+            font-size: 1.3rem;
+        }
+
+        .case-save {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
         }
 
         /* ========== CTA BAR ========== */
@@ -347,62 +438,100 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: var(--white);
+            background: #fff;
             box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
             padding: 1rem 1.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 100;
-            border-top: 3px solid var(--gold);
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .cta-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-right: 1rem;
+            display: none;
         }
 
         .cta-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, #c0392b 100%);
-            color: var(--white);
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
             text-decoration: none;
-            padding: 1rem 2.5rem;
+            padding: 0.95rem 2rem;
             border-radius: 50px;
-            font-weight: 800;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
             text-align: center;
-            width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             display: inline-block;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            letter-spacing: 0.5px;
         }
 
-        .cta-btn:hover { 
-            background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+        .cta-btn:hover {
+            background: linear-gradient(135deg, #128c7e 0%, #0d6c65 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
-        .cta-btn:active {
-            transform: translateY(0);
+        @media (max-width: 768px) {
+            .cta-text { display: inline; }
+            .cta-btn { padding: 0.85rem 1.5rem; font-size: 0.85rem; }
         }
 
-        body {
-            padding-bottom: 120px;
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--dark);
+            color: #cbd5e1;
+            padding: 3rem 1.5rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid #1e293b;
         }
 
-        @media (max-width: 640px) {
-            .container { padding: 1rem; }
-            .card { padding: 1.5rem; }
-            .cta-bar { padding: 0.8rem 1rem; }
-            .cta-btn { padding: 0.9rem 1.5rem; font-size: 0.9rem; }
-            body { padding-bottom: 140px; }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section p, .footer-section a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #1e293b;
+            font-size: 0.85rem;
+            color: #64748b;
         }
 
         /* ========== ANIMATIONS ========== */
-        @keyframes fadeIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -410,421 +539,555 @@
             }
         }
 
-        .card, .project-card {
-            animation: fadeIn 0.6s ease-out;
+        .card {
+            animation: fadeInUp 0.5s ease-out;
         }
 
-        .card:nth-child(n) {
-            animation-delay: calc(0.1s * var(--index, 1));
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
+
+        /* ========== LANGUAGE CONTENT ========== */
+        [data-lang="en"] { display: none; }
+
+        body.en [data-lang="zh-MY"] { display: none; }
+        body.en [data-lang="en"] { display: block; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            h3 { font-size: 1rem; }
+            li { font-size: 0.9rem; }
+            .hero h1 { font-size: 1.5rem; }
+            .section-title { font-size: 1.5rem; }
         }
 
-        /* ========== HIDE/SHOW BY LANGUAGE ========== */
-        [data-lang="en"] {
-            display: none;
-        }
-
-        .lang-en [data-lang="en"] {
-            display: block;
-        }
-
-        .lang-en [data-lang="zh"] {
-            display: none;
-        }
-
-        /* ========== PRINT ========== */
         @media print {
             .cta-bar { display: none; }
+            header { position: static; }
             body { padding-bottom: 0; }
         }
     </style>
 </head>
-<body class="lang-zh">
+<body>
 
-<!-- HEADER -->
+<!-- ========== HEADER ========== -->
 <header>
-    <div class="logo-container">
-        <div style="font-size: 1.5rem;">☀️</div>
-        <div class="company-name" data-lang="zh">Spower Solar Energy</div>
-        <div class="company-name" data-lang="en">Spower Solar Energy</div>
-    </div>
-    
-    <div class="language-switch">
-        <button class="lang-btn active" onclick="switchLanguage('zh')" data-lang="zh">中文</button>
-        <button class="lang-btn" onclick="switchLanguage('en')" data-lang="en">English</button>
+    <div class="header-content">
+        <a href="#" class="logo">
+            <span data-lang="zh-MY">Spower Solar</span>
+            <span data-lang="en">Spower Solar</span>
+        </a>
+        
+        <nav>
+            <a href="#suria" data-lang="zh-MY">SuRIA Home</a>
+            <a href="#suria" data-lang="en">SuRIA Home</a>
+            
+            <a href="#atap" data-lang="zh-MY">Solar ATAP</a>
+            <a href="#atap" data-lang="en">Solar ATAP</a>
+            
+            <a href="#cases" data-lang="zh-MY">成功案例</a>
+            <a href="#cases" data-lang="en">Success Cases</a>
+            
+            <a href="#faq" data-lang="zh-MY">常见问答</a>
+            <a href="#faq" data-lang="en">FAQ</a>
+        </nav>
+        
+        <div class="header-right">
+            <button class="lang-toggle active" onclick="switchLanguage('zh-MY')">中文</button>
+            <button class="lang-toggle" onclick="switchLanguage('en')">English</button>
+        </div>
     </div>
 </header>
 
-<!-- HERO SECTION -->
+<!-- ========== HERO ========== -->
 <section class="hero">
-    <h1 data-lang="zh">☀️ 马来西亚政府最新太阳能回扣</h1>
-    <h1 data-lang="en">☀️ Malaysia's Latest Solar Subsidies</h1>
-    <p data-lang="zh">安装屋顶太阳能，不仅能每月节省高达 90% 电费，现在还能直接获得政府高达 <strong>RM3,000</strong> 的现金回扣！</p>
-    <p data-lang="en">Install rooftop solar panels to save up to 90% on monthly electricity bills and receive up to <strong>RM3,000</strong> in government cash rebates!</p>
+    <div class="hero-content">
+        <h1 data-lang="zh-MY">💰 马来西亚太阳能回扣完整指南</h1>
+        <h1 data-lang="en">💰 Malaysia Solar Subsidy Complete Guide</h1>
+        
+        <p data-lang="zh-MY">获取高达 RM3,000 现金回扣 + 每月节省 90% 电费。SuRIA Home 和 Solar ATAP 的终极指南。</p>
+        <p data-lang="en">Get up to RM3,000 cash rebate + save 90% monthly electricity. The ultimate guide to SuRIA Home and Solar ATAP.</p>
+        
+        <div class="hero-buttons">
+            <a href="#suria" class="btn btn-primary">
+                <span data-lang="zh-MY">📊 了解 SuRIA Home</span>
+                <span data-lang="en">📊 Learn SuRIA Home</span>
+            </a>
+            <a href="#atap" class="btn btn-primary">
+                <span data-lang="zh-MY">⚡ 了解 Solar ATAP</span>
+                <span data-lang="en">⚡ Learn Solar ATAP</span>
+            </a>
+        </div>
+    </div>
 </section>
 
-<!-- MAIN CONTENT -->
+<!-- ========== MAIN CONTENT ========== -->
 <div class="container">
 
-    <!-- ========== SURIA HOME SECTION ========== -->
-    <section>
-        <h2 class="section-title">
-            <span data-lang="zh">📊 SuRIA Home 计划简报</span>
-            <span data-lang="en">📊 SuRIA Home Plan Overview</span>
-        </h2>
+    <!-- ========== SURIA HOME ========== -->
+    <section class="section" id="suria">
+        <h2 class="section-title" data-lang="zh-MY">📊 SuRIA Home 资助计划</h2>
+        <h2 class="section-title" data-lang="en">📊 SuRIA Home Subsidy Program</h2>
 
-        <div class="card">
-            <div class="card-title" data-lang="zh">💡 什么是 SuRIA Home 计划？</div>
-            <div class="card-title" data-lang="en">💡 What is the SuRIA Home Plan?</div>
-            <p data-lang="zh">这是马来西亚政府为鼓励住宅用户安装太阳能而推出的官方现金回扣计划。旨在帮助民众降低安装初创成本，实现长期省电。</p>
-            <p data-lang="en">This is Malaysia's government cash rebate program designed to encourage residential users to install solar panels. It aims to help people reduce installation costs and achieve long-term electricity savings.</p>
-        </div>
-
-        <div class="card">
-            <div class="card-title" data-lang="zh">💰 您能获得多少回扣？</div>
-            <div class="card-title" data-lang="en">💰 How Much Rebate Can You Get?</div>
-            
-            <div class="card-subtitle" data-lang="zh">回扣标准：</div>
-            <div class="card-subtitle" data-lang="en">Rebate Standard:</div>
-            <ul>
-                <li data-lang="zh">每安装 <strong>1 kWac</strong> 系统，可拿回 <strong>RM600</strong> 现金</li>
-                <li data-lang="en">For every <strong>1 kWac</strong> system installed, get <strong>RM600</strong> in cash</li>
-            </ul>
-
-            <div class="highlight-box">
-                <strong data-lang="zh">💰 回扣上限：最高可获得 RM3,000 现金回扣</strong>
-                <strong data-lang="en">💰 Maximum Rebate: Get up to RM3,000 in cash rebates</strong>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem;" data-lang="zh">（对应 5 kWac 及以上的系统）</p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem;" data-lang="en">(Applicable to systems 5 kWac and above)</p>
+        <div class="grid">
+            <!-- Card 1: 什么是 SuRIA Home -->
+            <div class="card">
+                <h2>💡 <span data-lang="zh-MY">什么是 SuRIA Home？</span><span data-lang="en">What is SuRIA Home?</span></h2>
+                <p data-lang="zh-MY">这是马来西亚政府为鼓励住宅用户安装太阳能而推出的官方现金回扣计划。旨在帮助民众降低安装初创成本，实现长期省电。</p>
+                <p data-lang="en">This is an official cash rebate program launched by the Malaysian government to encourage residential users to install solar energy. It aims to help people reduce installation costs and achieve long-term electricity savings.</p>
+                
+                <div class="highlight-box">
+                    <strong data-lang="zh-MY">💬 政府支持：</strong>
+                    <strong data-lang="en">💬 Government Support:</strong>
+                    <span data-lang="zh-MY">由永续能源发展机构 (SEDA) 和国能 (TNB) 联合推出</span>
+                    <span data-lang="en">Jointly launched by SEDA (Suruhanjaya Tenaga Boleh Diperbaharui) and TNB</span>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <div class="card-title" data-lang="zh">📋 谁符合申请资格？</div>
-            <div class="card-title" data-lang="en">📋 Who Qualifies for the Application?</div>
-            <p data-lang="zh">只要您满足以下简单条件即可申请：</p>
-            <p data-lang="en">You can apply if you meet the following simple conditions:</p>
-            <ul>
-                <li data-lang="zh"><strong>身份：</strong>马来西亚公民</li>
-                <li data-lang="en"><strong>Status:</strong> Malaysian citizen</li>
+            <!-- Card 2: 回扣金额 -->
+            <div class="card">
+                <h2>💰 <span data-lang="zh-MY">您能获得多少回扣？</span><span data-lang="en">How Much Rebate Can You Get?</span></h2>
                 
-                <li data-lang="zh"><strong>户口：</strong>国能（TNB）住宅电费单的注册户主</li>
-                <li data-lang="en"><strong>Account:</strong> Registered owner of TNB residential electricity bill</li>
-                
-                <li data-lang="zh"><strong>条件：</strong>每个 TNB 账户仅限申请一次，且此前未享受过 SolaRIS 等其他国家太阳能补贴</li>
-                <li data-lang="en"><strong>Condition:</strong> One application per TNB account. You must not have previously received other national solar subsidies like SolaRIS</li>
-            </ul>
-        </div>
+                <h3 data-lang="zh-MY">💵 回扣标准</h3>
+                <h3 data-lang="en">💵 Rebate Rate</h3>
+                <ul>
+                    <li data-lang="zh-MY">每安装 <strong>1 kWac</strong> 系统，可拿回 <strong>RM600</strong> 现金</li>
+                    <li data-lang="en">For every <strong>1 kWac</strong> system installed, get <strong>RM600</strong> cash</li>
+                </ul>
 
-        <div class="card">
-            <div class="card-title" data-lang="zh">⚠️ 为什么现在是最佳安装时机？</div>
-            <div class="card-title" data-lang="en">⚠️ Why Now is the Best Time to Install?</div>
-            <ul>
-                <li data-lang="zh"><strong>先到先得：</strong>政府总拨款额有限，配额抢完即止</li>
-                <li data-lang="en"><strong>First Come, First Served:</strong> Limited government budget, quota runs out quickly</li>
-                
-                <li data-lang="zh"><strong>截至日期：</strong>所有系统必须在 <strong>2026年12月31日前</strong> 完成安装与投运</li>
-                <li data-lang="en"><strong>Deadline:</strong> All systems must be installed and operational by <strong>December 31, 2026</strong></li>
-                
-                <li data-lang="zh"><strong>双重收益：</strong>拿完 RM3,000 现金回扣后，系统开始运作，您的每月电费将大幅下降</li>
-                <li data-lang="en"><strong>Double Benefits:</strong> After receiving the RM3,000 cash rebate, your system operates and your monthly bills drop significantly</li>
-            </ul>
+                <h3 data-lang="zh-MY">🎯 回扣上限</h3>
+                <h3 data-lang="en">🎯 Maximum Rebate</h3>
+                <ul>
+                    <li data-lang="zh-MY"><strong>最高 RM3,000</strong> 现金回扣（对应 5 kWac 及以上的系统）</li>
+                    <li data-lang="en"><strong>Maximum RM3,000</strong> cash rebate (for systems 5 kWac and above)</li>
+                </ul>
 
-            <div class="warning-box">
-                <strong data-lang="zh">🚀 立即行动！</strong>
-                <strong data-lang="en">🚀 Act Now!</strong>
-                <p style="margin-top: 0.5rem;" data-lang="zh">为了帮您最大化获取这笔福利，我们可以为您提供一站式服务（从屋顶评估、系统设计到直接帮您向政府对接申请该回扣）。</p>
-                <p style="margin-top: 0.5rem;" data-lang="en">To help you maximize this benefit, we provide an all-in-one service (from roof assessment, system design to government rebate application).</p>
+                <div class="info-box">
+                    <strong data-lang="zh-MY">📈 示例：</strong>
+                    <strong data-lang="en">📈 Example:</strong>
+                    <span data-lang="zh-MY">• 3 kWac 系统 = RM1,800 | • 5 kWac 系统 = RM3,000 | • 7 kWac 系统 = RM3,000</span>
+                    <span data-lang="en">• 3 kWac system = RM1,800 | • 5 kWac system = RM3,000 | • 7 kWac system = RM3,000</span>
+                </div>
+            </div>
+
+            <!-- Card 3: 申请资格 -->
+            <div class="card">
+                <h2>📋 <span data-lang="zh-MY">谁符合申请资格？</span><span data-lang="en">Who Is Eligible?</span></h2>
+                <ul>
+                    <li data-lang="zh-MY"><strong>身份：</strong>马来西亚公民</li>
+                    <li data-lang="en"><strong>Citizenship:</strong> Malaysian citizen</li>
+                    
+                    <li data-lang="zh-MY"><strong>户口：</strong>国能 (TNB) 住宅电费单的注册户主</li>
+                    <li data-lang="en"><strong>Account:</strong> Registered owner of TNB residential electricity bill</li>
+                    
+                    <li data-lang="zh-MY"><strong>系统：</strong>已安装 Solar ATAP 系统</li>
+                    <li data-lang="en"><strong>System:</strong> Already installed Solar ATAP system</li>
+                    
+                    <li data-lang="zh-MY"><strong>时限：</strong>必须在 <strong>2026年12月31日前</strong> 完成安装和投运</li>
+                    <li data-lang="en"><strong>Deadline:</strong> Must complete installation and operation by <strong>December 31, 2026</strong></li>
+                    
+                    <li data-lang="zh-MY"><strong>限制：</strong>每个 TNB 账户仅限申请一次，且此前未享受过其他国家太阳能补贴</li>
+                    <li data-lang="en"><strong>Limitation:</strong> One application per TNB account, no previous national solar subsidies</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong data-lang="zh-MY">⚠️ 先到先得：</strong>
+                    <strong data-lang="en">⚠️ First Come, First Served:</strong>
+                    <span data-lang="zh-MY">政府总拨款额有限，配额抢完即止。建议尽早咨询和申请。</span>
+                    <span data-lang="en">Government funding is limited. We recommend consulting and applying early.</span>
+                </div>
+            </div>
+
+            <!-- Card 4: 为什么现在是最佳时机 -->
+            <div class="card">
+                <h2>🚀 <span data-lang="zh-MY">为什么现在是最佳时机？</span><span data-lang="en">Why Is Now The Best Time?</span></h2>
+                <ul>
+                    <li data-lang="zh-MY"><strong>时间有限：</strong>配额抢完即止，晚了就没有了</li>
+                    <li data-lang="en"><strong>Time Limited:</strong> Once quotas are exhausted, no more availability</li>
+                    
+                    <li data-lang="zh-MY"><strong>截止日期：</strong>所有系统必须在 2026年12月31日前完成投运</li>
+                    <li data-lang="en"><strong>Deadline:</strong> All systems must be operational by December 31, 2026</li>
+                    
+                    <li data-lang="zh-MY"><strong>双重收益：</strong>拿完 RM3,000 现金回扣后，系统开始运作，您的每月电费将大幅下降</li>
+                    <li data-lang="en"><strong>Double Benefits:</strong> After receiving RM3,000 rebate, your monthly electricity bill drops significantly</li>
+                    
+                    <li data-lang="zh-MY"><strong>投资回报：</strong>平均 3-4 年内收回成本，之后长期免费用电（系统寿命 25+ 年）</li>
+                    <li data-lang="en"><strong>ROI:</strong> Typically recover costs in 3-4 years, then free electricity for life (25+ year lifespan)</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- ========== SOLAR ATAP SECTION ========== -->
-    <section style="margin-top: 3rem;">
-        <h2 class="section-title">
-            <span data-lang="zh">⚡ Solar ATAP 全新计费机制</span>
-            <span data-lang="en">⚡ Solar ATAP New Billing System</span>
-        </h2>
+    <!-- ========== SOLAR ATAP ========== -->
+    <section class="section" id="atap">
+        <h2 class="section-title" data-lang="zh-MY">⚡ Solar ATAP 全新机制</h2>
+        <h2 class="section-title" data-lang="en">⚡ Solar ATAP New Framework</h2>
 
-        <div class="card">
-            <div class="card-title" data-lang="zh">💡 什么是 Solar ATAP？</div>
-            <div class="card-title" data-lang="en">💡 What is Solar ATAP?</div>
-            <p data-lang="zh">自 2026 年 1 月 1 日起，大马政府正式启动全新的 Solar ATAP 框架，全面取代了旧的 NEM 3.0 系统。</p>
-            <p data-lang="en">Starting January 1, 2026, Malaysia's government launched the new Solar ATAP framework, completely replacing the old NEM 3.0 system.</p>
-            <p data-lang="zh"><strong>全称：</strong>Solar Accelerated Transition Action Programme</p>
-            <p data-lang="en"><strong>Full Name:</strong> Solar Accelerated Transition Action Programme</p>
-            <p data-lang="zh">它是大马政府（通过永续能源发展机构 SEDA）制定的最新政策，规定了您的屋顶太阳能如何与国能（TNB）电网连���，以及您多发的电如何用来扣除电费。</p>
-            <p data-lang="en">It is Malaysia's latest policy (via SEDA) that defines how your rooftop solar connects to the TNB grid and how excess power reduces your electricity bill.</p>
-
-            <div class="highlight-box">
-                <strong data-lang="zh">✅ 新机制优势</strong>
-                <strong data-lang="en">✅ New System Advantages</strong>
-                <p style="margin-top: 0.5rem;" data-lang="zh">不再设"固定总配额"限制，让更多住宅和企业能更自由地安装太阳能、节省电费！</p>
-                <p style="margin-top: 0.5rem;" data-lang="en">No more total quota limits, allowing more homes and businesses to freely install solar and save on electricity!</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-title" data-lang="zh">⚙️ 它是如何帮您省钱的？（运作原理）</div>
-            <div class="card-title" data-lang="en">⚙️ How Does It Save You Money? (Operating Principle)</div>
-            <p data-lang="zh">ATAP 采用"自用优先，多余回扣"的精明计费模式：</p>
-            <p data-lang="en">ATAP uses a smart "self-use first, excess credit" billing model:</p>
-
-            <ul>
-                <li data-lang="zh"><strong>白天直接免费用：</strong>太阳能板发电后，直接供您家里的冷气、冰箱等电器使用。这部分电完全免费，帮您省下高昂的 TNB 电费。</li>
-                <li data-lang="en"><strong>Free Daytime Use:</strong> Solar panels directly power your air conditioning, refrigerator, etc. This electricity is completely free, saving you high TNB bills.</li>
+        <div class="grid">
+            <!-- Card 1: 什么是 ATAP -->
+            <div class="card card-atap">
+                <h2>🎯 <span data-lang="zh-MY">什么是 Solar ATAP？</span><span data-lang="en">What is Solar ATAP?</span></h2>
+                <p data-lang="zh-MY">全称：<strong>Solar Accelerated Transition Action Programme</strong></p>
+                <p data-lang="en">Full name: <strong>Solar Accelerated Transition Action Programme</strong></p>
                 
-                <li data-lang="zh"><strong>多余电量卖给 TNB：</strong>如果您家里没人，用不完的电会自动输送回 TNB 电网。</li>
-                <li data-lang="en"><strong>Sell Excess to TNB:</strong> If no one's home, unused power automatically feeds back to the TNB grid.</li>
-                
-                <li data-lang="zh"><strong>电费单直接扣除：</strong>输送回电网的电量会转化为电费信用（Credits），直接在您当月的 TNB 电费单里扣除。（住宅用户直接抵扣每度电的零售电价成本）。</li>
-                <li data-lang="en"><strong>Direct Bill Credit:</strong> Power fed back becomes electricity credits, deducted directly from your current TNB bill (residential users get retail rate credits).</li>
-            </ul>
-        </div>
+                <p data-lang="zh-MY">自 2026 年 1 月 1 日起，大马政府正式启动的全新太阳能框架，全面取代了旧的 NEM 3.0 系统。</p>
+                <p data-lang="en">Starting January 1, 2026, Malaysia's new solar framework officially launched by the government, completely replacing the old NEM 3.0 system.</p>
 
-        <div class="card">
-            <div class="card-title" data-lang="zh">📋 住宅用户的安装容量限制</div>
-            <div class="card-title" data-lang="en">📋 Residential Installation Capacity Limits</div>
-            <p data-lang="zh">根据您的电表类型，新政策给予了非常充足的安装额度：</p>
-            <p data-lang="en">Based on your meter type, the new policy provides generous installation limits:</p>
-
-            <ul>
-                <li data-lang="zh"><strong>单相电表（Single-Phase）：</strong>最高可安装 5 kW</li>
-                <li data-lang="en"><strong>Single-Phase Meter:</strong> Maximum 5 kW installation</li>
-                
-                <li data-lang="zh"><strong>三相电表（Three-Phase）：</strong>最高可安装 15 kW</li>
-                <li data-lang="en"><strong>Three-Phase Meter:</strong> Maximum 15 kW installation</li>
-                
-                <li data-lang="zh">（一般家庭绰绰有余）</li>
-                <li data-lang="en">(More than enough for typical homes)</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <div class="card-title" data-lang="zh">⚠️ 客户必须注意的重要规则</div>
-            <div class="card-title" data-lang="en">⚠️ Important Rules to Remember</div>
-
-            <ul>
-                <li data-lang="zh"><strong>每月结算，不滚存：</strong>太阳能回扣是在当月电费单中直接扣除。如果发出的电太多，把当月电费扣到 RM0 还有剩余，剩余的额度不能带到下个月，也不会换成现金发放。</li>
-                <li data-lang="en"><strong>Monthly Settlement, No Rollover:</strong> Solar credits are deducted from your current bill. If you have excess credits after paying to RM0, they cannot carry over to next month or be paid in cash.</li>
-                
-                <li data-lang="zh"><strong>因此：</strong>我们会为您量身定制最精准的系统容量，绝不让您花冤枉钱多装。</li>
-                <li data-lang="en"><strong>Therefore:</strong> We custom-design your system perfectly so you don't overspend on excess capacity.</li>
-                
-                <li data-lang="zh"><strong>10年合约期：</strong>与 TNB 签署的 ATAP 发电回扣合约期限为 10 年。10年之后，系统依然属于您并可以继续免费发电供家里自用。</li>
-                <li data-lang="en"><strong>10-Year Contract:</strong> Your ATAP electricity credit contract with TNB is for 10 years. After 10 years, the system is still yours and continues generating free power for your home.</li>
-            </ul>
-        </div>
-
-        <div class="warning-box">
-            <strong data-lang="zh">💡 Right-Sizing 重要性</strong>
-            <strong data-lang="en">💡 Right-Sizing Importance</strong>
-            <p style="margin-top: 0.5rem;" data-lang="zh">在新的 ATAP 机制下，太阳能系统并非"越大越好"，而是需要根据您家庭白天的实际用电比例进行精准量身设计，才能让投资回报率（ROI）最大化。</p>
-            <p style="margin-top: 0.5rem;" data-lang="en">Under the new ATAP system, bigger isn't always better. The system should be precisely designed based on your home's actual daytime power usage to maximize ROI.</p>
-        </div>
-    </section>
-
-    <!-- ========== PROJECTS SECTION ========== -->
-    <section style="margin-top: 3rem;">
-        <h2 class="section-title">
-            <span data-lang="zh">🏆 成功案例展示</span>
-            <span data-lang="en">🏆 Success Stories</span>
-        </h2>
-
-        <div class="projects-grid">
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">☀️</div>
-                </div>
-                <div class="project-info">
-                    <div class="project-name" data-lang="zh">Sungai Petani 项目</div>
-                    <div class="project-name" data-lang="en">Sungai Petani Project</div>
-                    <div class="project-stats">
-                        <div class="project-power">28.40 kWp</div>
-                        <div data-lang="zh">系统容量</div>
-                        <div data-lang="en">System Capacity</div>
-                        <div style="margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 0.5rem;">
-                            <div data-lang="zh">每月省电：</div>
-                            <div data-lang="en">Monthly Savings:</div>
-                            <div class="project-savings">RM1,600</div>
-                        </div>
-                    </div>
+                <div class="highlight-box">
+                    <strong data-lang="zh-MY">✨ 核心优势：</strong>
+                    <strong data-lang="en">✨ Key Benefits:</strong>
+                    <ul style="margin-top: 0.5rem;">
+                        <li data-lang="zh-MY">不再设"固定总配额"限制，更多家庭能安装太阳能</li>
+                        <li data-lang="en">No fixed total quota limit, more homes can install solar</li>
+                        <li data-lang="zh-MY">计费更透明，回扣更直接</li>
+                        <li data-lang="en">More transparent billing, direct rebates</li>
+                        <li data-lang="zh-MY">自发自用，多余回扣，机制更合理</li>
+                        <li data-lang="en">Self-use priority, excess sold back, more rational mechanism</li>
+                    </ul>
                 </div>
             </div>
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #f4d03f 0%, #f5b041 100%); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 3rem;">📦</div>
-                </div>
-                <div class="project-info">
-                    <div class="project-name" data-lang="zh">Alor Setar 项目（1）</div>
-                    <div class="project-name" data-lang="en">Alor Setar Project (1)</div>
-                    <div class="project-stats">
-                        <div class="project-power">18.46 kWp</div>
-                        <div data-lang="zh">系统容量</div>
-                        <div data-lang="en">System Capacity</div>
-                        <div style="margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 0.5rem;">
-                            <div data-lang="zh">每月省电：</div>
-                            <div data-lang="en">Monthly Savings:</div>
-                            <div class="project-savings">RM1,000</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Card 2: 运作原理 -->
+            <div class="card card-atap">
+                <h2>🔄 <span data-lang="zh-MY">核心运作逻辑：「自发自用」</span><span data-lang="en">Core Logic: "Self-Consumption First"</span></h2>
+                
+                <h3 data-lang="zh-MY">1️⃣ 白天直接免费用</h3>
+                <h3 data-lang="en">1️⃣ Free Daytime Usage</h3>
+                <p data-lang="zh-MY">太阳能板发电后，直接供您家里的冷气、冰箱等电器使用。这部分电完全免费，帮您省下高昂的 TNB 电费。</p>
+                <p data-lang="en">Solar panels generate electricity for your AC, refrigerator, and appliances directly. This portion is completely free, saving you expensive TNB fees.</p>
 
-            <!-- Project 3 -->
-            <div class="project-card">
-                <div class="project-image">
-                    <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏢</div>
+                <h3 data-lang="zh-MY">2️⃣ 多余电量卖给 TNB</h3>
+                <h3 data-lang="en">2️⃣ Sell Excess to TNB</h3>
+                <p data-lang="zh-MY">如果您家里没人或用电少，用不完的电会自动输送回 TNB 电网。</p>
+                <p data-lang="en">If your home is empty or uses less electricity, excess power is automatically sent back to TNB grid.</p>
+
+                <h3 data-lang="zh-MY">3️⃣ 电费单直接扣除</h3>
+                <h3 data-lang="en">3️⃣ Direct Bill Deduction</h3>
+                <p data-lang="zh-MY">输送回电网的电量会转化为电费信用 (Credits)，直接在您当月的 TNB 电费单里扣除。住宅用户直接抵扣每度电的零售电价成本。</p>
+                <p data-lang="en">Returned electricity converts to bill credits (Credits) deducted directly from your monthly TNB bill. Residential users get full retail price credit.</p>
+
+                <div class="warning-box">
+                    <strong data-lang="zh-MY">⚠️ 重要：每月结算，不滚存</strong>
+                    <strong data-lang="en">⚠️ Important: Monthly Settlement, No Carryover</strong>
+                    <p data-lang="zh-MY">太阳能回扣是在当月电费单中直接扣除。如果发出的电太多，把当月电费扣到 RM0 还有剩余，剩余的额度<strong>不能带到下个月</strong>，也不会换成现金发放。</p>
+                    <p data-lang="en">Solar credits are deducted directly from your current month's bill. If excess remains after reducing bill to RM0, it <strong>cannot carry to next month</strong> and won't be paid as cash.</p>
                 </div>
-                <div class="project-info">
-                    <div class="project-name" data-lang="zh">Alor Setar 项目（2）</div>
-                    <div class="project-name" data-lang="en">Alor Setar Project (2)</div>
-                    <div class="project-stats">
-                        <div class="project-power">12.78 kWp</div>
-                        <div data-lang="zh">系统容量</div>
-                        <div data-lang="en">System Capacity</div>
-                        <div style="margin-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 0.5rem;">
-                            <div data-lang="zh">每月省电：</div>
-                            <div data-lang="en">Monthly Savings:</div>
-                            <div class="project-savings">RM700</div>
-                        </div>
-                    </div>
+
+                <div class="highlight-box">
+                    <strong data-lang="zh-MY">💡 Spower 的专业建议（Right-Sizing）：</strong>
+                    <strong data-lang="en">💡 Spower Professional Advice (Right-Sizing):</strong>
+                    <p data-lang="zh-MY">在新的 ATAP 机制下，系统并非"越大越好"，而是需要根据您家庭白天的实际用电比例进行精准量身设计，才能让投资回报率（ROI）最大化。我们的专家团队将为您免费评估和设计最优方案。</p>
+                    <p data-lang="en">Under ATAP, bigger is not always better. Systems should be precisely sized to your daytime usage to maximize ROI. Our expert team will free assess and design the optimal solution.</p>
                 </div>
             </div>
-        </div>
 
-        <div class="card">
-            <p style="text-align: center; font-style: italic; color: var(--text-secondary);" data-lang="zh">
-                ✨ 这些项目已经帮助数百个马来西亚家庭节省了大量电费，同时保护环境！
-            </p>
-            <p style="text-align: center; font-style: italic; color: var(--text-secondary);" data-lang="en">
-                ✨ These projects have helped hundreds of Malaysian families save on electricity while protecting the environment!
-            </p>
-        </div>
-    </section>
+            <!-- Card 3: 安装容量限制 -->
+            <div class="card card-atap">
+                <h2>📦 <span data-lang="zh-MY">住宅安装容量限制</span><span data-lang="en">Residential Installation Capacity Limits</span></h2>
+                <ul>
+                    <li data-lang="zh-MY"><strong>单相电表（Single-Phase）：</strong>最高可安装 <strong>5 kW</strong></li>
+                    <li data-lang="en"><strong>Single-Phase Meter:</strong> Maximum <strong>5 kW</strong> installation</li>
+                    
+                    <li data-lang="zh-MY"><strong>三相电表（Three-Phase）：</strong>最高可安装 <strong>15 kW</strong></li>
+                    <li data-lang="en"><strong>Three-Phase Meter:</strong> Maximum <strong>15 kW</strong> installation</li>
+                </ul>
 
-    <!-- ========== FAQ SECTION ========== -->
-    <section style="margin-top: 3rem;">
-        <h2 class="section-title">
-            <span data-lang="zh">❓ 常见问答</span>
-            <span data-lang="en">❓ Frequently Asked Questions</span>
-        </h2>
-
-        <div class="card">
-            <div class="faq-item">
-                <div class="faq-question" data-lang="zh">Q: 我的房屋面积很小，适合装太阳能吗？</div>
-                <div class="faq-question" data-lang="en">Q: My house is small, is solar suitable?</div>
-                <div class="faq-answer" data-lang="zh">A: 通过精准的 Right-Sizing 规划，即使小面积住宅也可以获得良好的 ROI。建议先进行屋顶勘察与用电分析。</div>
-                <div class="faq-answer" data-lang="en">A: Through precise Right-Sizing planning, even small homes can get excellent ROI. We recommend starting with a roof survey and usage analysis.</div>
+                <div class="info-box">
+                    <strong data-lang="zh-MY">📊 一般家庭足够：</strong>
+                    <strong data-lang="en">📊 Typical Household Sufficient:</strong>
+                    <p data-lang="zh-MY">大多数马来西亚家庭都是单相电表，5 kW 容量足以满足日常需求并最大化 ROI。</p>
+                    <p data-lang="en">Most Malaysian homes have single-phase meters. 5 kW capacity is sufficient for daily needs and maximizes ROI.</p>
+                </div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question" data-lang="zh">Q: 系统投运后多久能申请 SuRIA Home 回扣？</div>
-                <div class="faq-question" data-lang="en">Q: How long after system operation can I apply for SuRIA Home rebate?</div>
-                <div class="faq-answer" data-lang="zh">A: 通常系统成功投运并在 TNB 系统注册后即可申请，具体时间请咨询您的安装商或 TNB 客服。</div>
-                <div class="faq-answer" data-lang="en">A: Usually you can apply once your system is operational and registered with TNB. Ask your installer or TNB customer service for exact timing.</div>
-            </div>
+            <!-- Card 4: 合约期限 -->
+            <div class="card card-atap">
+                <h2>📜 <span data-lang="zh-MY">合约期限与权益</span><span data-lang="en">Contract Duration & Rights</span></h2>
+                <ul>
+                    <li data-lang="zh-MY"><strong>10 年合约期：</strong>与 TNB 签署的 ATAP 发电回扣合约期限为 10 年</li>
+                    <li data-lang="en"><strong>10-Year Contract:</strong> ATAP generation rebate contract with TNB is 10 years</li>
+                    
+                    <li data-lang="zh-MY"><strong>10 年后：</strong>系统依然属于您并可以继续免费发电供家里自用</li>
+                    <li data-lang="en"><strong>After 10 Years:</strong> System remains yours, can continue generating free electricity for home use</li>
+                    
+                    <li data-lang="zh-MY"><strong>系统寿命：</strong>现代太阳能系统寿命长达 25+ 年，质保通常 10-25 年</li>
+                    <li data-lang="en"><strong>System Lifespan:</strong> Modern solar systems last 25+ years with warranties typically 10-25 years</li>
+                </ul>
 
-            <div class="faq-item">
-                <div class="faq-question" data-lang="zh">Q: 下雨天或晚上有发电吗？</div>
-                <div class="faq-question" data-lang="en">Q: Does the system generate power on rainy days or at night?</div>
-                <div class="faq-answer" data-lang="zh">A: 太阳能板在阴天会有少量发电，但效率大幅下降。晚上无法发电，此时需从电网供电。</div>
-                <div class="faq-answer" data-lang="en">A: Solar panels generate some power on cloudy days but with reduced efficiency. At night, no generation occurs; power comes from the grid.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" data-lang="zh">Q: 太阳能系统需要维护吗？</div>
-                <div class="faq-question" data-lang="en">Q: Does the solar system require maintenance?</div>
-                <div class="faq-answer" data-lang="zh">A: 建议 1-3 年清洁一次面板（如果很脏）。大多数系统故障率很低，质保通常为 10-25 年。</div>
-                <div class="faq-answer" data-lang="en">A: We recommend cleaning panels once every 1-3 years if dirty. Most systems have very low failure rates with 10-25 year warranties.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" data-lang="zh">Q: 现在安装，能同时获得两种回扣吗？</div>
-                <div class="faq-question" data-lang="en">Q: Can I get both rebates if I install now?</div>
-                <div class="faq-answer" data-lang="zh">A: 完全可以！只要您在 Solar ATAP 机制下提交住宅太阳能申请，我们就会协助您同步申请最新的 SuRIA Home 计划，直接拿取高达 RM3,000 的现金回扣！</div>
-                <div class="faq-answer" data-lang="en">A: Absolutely! When you apply for residential solar under Solar ATAP, we help you simultaneously apply for SuRIA Home to get up to RM3,000 in cash rebates!</div>
+                <div class="highlight-box">
+                    <strong data-lang="zh-MY">✅ 长期价值：</strong>
+                    <strong data-lang="en">✅ Long-Term Value:</strong>
+                    <p data-lang="zh-MY">这不是租赁，您完全拥有这个系统。10 年合约结束后，您仍然享受大约 15+ 年的完全免费用电。</p>
+                    <p data-lang="en">This is ownership, not leasing. After 10 years, you still enjoy 15+ years of completely free electricity.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ========== CLOSING SECTION ========== -->
-    <section style="margin-top: 3rem; margin-bottom: 3rem;">
-        <div class="card" style="background: linear-gradient(135deg, var(--primary) 0%, #c0392b 100%); color: var(--white); border-left-color: var(--gold); text-align: center;">
-            <h2 style="color: var(--white); margin-bottom: 1rem;" data-lang="zh">🤝 现在就开始您的太阳能之旅</h2>
-            <h2 style="color: var(--white); margin-bottom: 1rem;" data-lang="en">🤝 Start Your Solar Journey Today</h2>
-            
-            <p style="font-size: 1.05rem; margin-bottom: 1.5rem;" data-lang="zh">
-                我们提供从 SEDA 申报、TNB 换表到系统安装的一站式代办服务。
-            </p>
-            <p style="font-size: 1.05rem; margin-bottom: 1.5rem;" data-lang="en">
-                We provide an all-in-one service from SEDA registration, TNB meter replacement to system installation.
-            </p>
+    <!-- ========== SUCCESS CASES ========== -->
+    <section class="section" id="cases">
+        <h2 class="section-title" data-lang="zh-MY">✨ Spower 成功案例</h2>
+        <h2 class="section-title" data-lang="en">✨ Spower Success Cases</h2>
 
-            <div class="highlight-box" style="background: rgba(255,255,255,0.15); border-left-color: var(--gold); color: var(--white);">
-                <strong data-lang="zh">📋 您需要准备什么？</strong>
-                <strong data-lang="en">📋 What Do You Need?</strong>
-                <p style="margin-top: 0.5rem; font-size: 0.95rem;" data-lang="zh">只需发送您最近的电费单，我们将免费为您计算最合理的安装容量与投资回报率！</p>
-                <p style="margin-top: 0.5rem; font-size: 0.95rem;" data-lang="en">Simply send us your recent electricity bill, and we'll calculate the optimal system size and ROI for free!</p>
+        <div class="grid">
+            <!-- Case 1 -->
+            <div class="card card-case">
+                <h3 data-lang="zh-MY">案例 1：Sungai Petani 项目</h3>
+                <h3 data-lang="en">Case 1: Sungai Petani Project</h3>
+                <div class="case-image" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏢</div>
+                <p data-lang="zh-MY"><strong>项目类型：</strong>工业屋顶太阳能</p>
+                <p data-lang="en"><strong>Project Type:</strong> Industrial Rooftop Solar</p>
+                <div class="case-info">
+                    <div class="case-kw" data-lang="zh-MY">28.40 kWp 系统</div>
+                    <div class="case-kw" data-lang="en">28.40 kWp System</div>
+                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM1,600</div>
+                    <div class="case-save" data-lang="en">💰 Save RM1,600/month</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM19,200</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM19,200</p>
+            </div>
+
+            <!-- Case 2 -->
+            <div class="card card-case">
+                <h3 data-lang="zh-MY">案例 2：Alor Setar 项目（墙面）</h3>
+                <h3 data-lang="en">Case 2: Alor Setar Project (Wall)</h3>
+                <div class="case-image" style="background: linear-gradient(135deg, #f97316, #fb923c); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏭</div>
+                <p data-lang="zh-MY"><strong>项目类型：</strong>商业建筑墙面太阳能</p>
+                <p data-lang="en"><strong>Project Type:</strong> Commercial Wall Solar</p>
+                <div class="case-info">
+                    <div class="case-kw" data-lang="zh-MY">18.46 kWp 系统</div>
+                    <div class="case-kw" data-lang="en">18.46 kWp System</div>
+                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM1,000</div>
+                    <div class="case-save" data-lang="en">💰 Save RM1,000/month</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM12,000</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM12,000</p>
+            </div>
+
+            <!-- Case 3 -->
+            <div class="card card-case">
+                <h3 data-lang="zh-MY">案例 3：Alor Setar 航拍项目</h3>
+                <h3 data-lang="en">Case 3: Alor Setar Aerial Project</h3>
+                <div class="case-image" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">🏠</div>
+                <p data-lang="zh-MY"><strong>项目类型：</strong>混合应用（屋顶+墙面）</p>
+                <p data-lang="en"><strong>Project Type:</strong> Mixed Application (Roof + Wall)</p>
+                <div class="case-info">
+                    <div class="case-kw" data-lang="zh-MY">12.78 kWp 系统</div>
+                    <div class="case-kw" data-lang="en">12.78 kWp System</div>
+                    <div class="case-save" data-lang="zh-MY">💰 每月节省 RM700</div>
+                    <div class="case-save" data-lang="en">💰 Save RM700/month</div>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="zh-MY">✅ 已完成投运 | ✅ 客户满意度 100% | ✅ 年度节省 RM8,400</p>
+                <p style="margin-top: 1rem; font-size: 0.85rem;" data-lang="en">✅ Operational | ✅ 100% Customer Satisfaction | ✅ Annual Savings RM8,400</p>
             </div>
         </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">59+</div>
+                <div class="stat-label" data-lang="zh-MY">完成项目</div>
+                <div class="stat-label" data-lang="en">Completed Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+ kW</div>
+                <div class="stat-label" data-lang="zh-MY">已安装容量</div>
+                <div class="stat-label" data-lang="en">Installed Capacity</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">RM 800k+</div>
+                <div class="stat-label" data-lang="zh-MY">客户年度节省</div>
+                <div class="stat-label" data-lang="en">Annual Customer Savings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">98%</div>
+                <div class="stat-label" data-lang="zh-MY">客户满意度</div>
+                <div class="stat-label" data-lang="en">Customer Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section class="section" id="faq">
+        <h2 class="section-title" data-lang="zh-MY">❓ 常见问答</h2>
+        <h2 class="section-title" data-lang="en">❓ Frequently Asked Questions</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 我的房屋面积很小，适合装太阳能吗？</h3>
+                <h3 data-lang="en">Q: Is solar suitable for small houses?</h3>
+                <p data-lang="zh-MY">A: 通过精准的 Right-Sizing 规划，即使小面积住宅也可以获得良好的 ROI。建议先进行屋顶勘察与用电分析。Spower 提供免费的专业评估。</p>
+                <p data-lang="en">A: Through precise Right-Sizing planning, even small homes can achieve good ROI. We recommend free roof assessment and electricity analysis first. Spower provides professional evaluation at no cost.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 系统投运后多久能申请 SuRIA Home 回扣？</h3>
+                <h3 data-lang="en">Q: When can I apply for SuRIA Home rebate after installation?</h3>
+                <p data-lang="zh-MY">A: 通常系统成功投运并在 TNB 系统注册后即可申请，具体时间请咨询您的安装商或 TNB 客服。Spower 提供全程协助。</p>
+                <p data-lang="en">A: Usually after system is operational and registered in TNB system. Contact your installer or TNB customer service for specifics. Spower assists throughout the process.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 下雨天或晚上有发电吗？</h3>
+                <h3 data-lang="en">Q: Does it generate electricity on rainy days or at night?</h3>
+                <p data-lang="zh-MY">A: 太阳能板在阴天会有少量发电，但效率大幅下降（约 10-25%）。晚上无法发电，此时需从电网供电。</p>
+                <p data-lang="en">A: Solar panels generate minimal power on cloudy days (10-25% efficiency). They don't generate at night; you draw from the grid. We design systems accounting for this.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 太阳能系统需要维护吗？</h3>
+                <h3 data-lang="en">Q: Does the solar system need maintenance?</h3>
+                <p data-lang="zh-MY">A: 建议 1-3 年清洁一次面板（如果很脏）。大多数系统故障率很低，质保通常为 10-25 年。Spower 提供售后维护服务。</p>
+                <p data-lang="en">A: Clean panels every 1-3 years if very dirty. Most systems have low failure rates with 10-25 year warranties. Spower offers after-sales maintenance.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 安装需要多长时间？</h3>
+                <h3 data-lang="en">Q: How long does installation take?</h3>
+                <p data-lang="zh-MY">A: 一般 2-4 周（包括勘察、设计、采购、安装、并网审批）。紧急情况下可加快。Spower 项目经理全程跟踪。</p>
+                <p data-lang="en">A: Typically 2-4 weeks (including survey, design, procurement, installation, grid approval). Can be expedited if needed. Spower project manager tracks throughout.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 我可以获得多少电费折扣？</h3>
+                <h3 data-lang="en">Q: How much can I save on electricity bills?</h3>
+                <p data-lang="zh-MY">A: 取决于您的系统容量、地理位置和用电习惯。一般可节省 50-90% 电费。Spower 提供免费计算器帮您估算。</p>
+                <p data-lang="en">A: Depends on system size, location, and usage habits. Typically 50-90% savings. Spower provides free calculator to estimate your savings.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 如果我要搬家怎么办？</h3>
+                <h3 data-lang="en">Q: What if I move?</h3>
+                <p data-lang="zh-MY">A: 系统属于您，可以继续留在原房产并转让给新业主。或者联系 TNB 办理系统转移。Spower 可提供协助。</p>
+                <p data-lang="en">A: The system is yours. You can leave it with the property and transfer ownership to new owner, or contact TNB for system transfer. Spower can assist.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: Spower 提供什么服务？</h3>
+                <h3 data-lang="en">Q: What services does Spower provide?</h3>
+                <p data-lang="zh-MY">A: 一站式服务包括：屋顶评估 → 系统设计 → 采购安装 → TNB 换表 → SEDA 申请 → 售后维护。我们处理所有技术和行政事务。</p>
+                <p data-lang="en">A: One-stop service: roof assessment → system design → procurement & installation → TNB meter upgrade → SEDA application → after-sales support. We handle everything.</p>
+            </div>
+
+            <div class="card">
+                <h3 data-lang="zh-MY">Q: 费用是多少？</h3>
+                <h3 data-lang="en">Q: What's the cost?</h3>
+                <p data-lang="zh-MY">A: 系统成本取决于容量和质量。一般每 kW 成本 RM3,000-5,000。加上 RM3,000 回扣后，投资回报率通常 3-4 年。免费咨询获取详细报价。</p>
+                <p data-lang="en">A: System cost depends on capacity and quality. Typically RM3,000-5,000 per kW. With RM3,000 rebate, ROI usually 3-4 years. Free consultation for detailed quotes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="section" style="text-align: center; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(59,130,246,0.05) 100%); padding: 3rem 1.5rem; border-radius: 12px; margin-bottom: 4rem;">
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;" data-lang="zh-MY">🎯 准备开始了吗？</h2>
+        <h2 style="font-size: 1.8rem; margin-bottom: 1rem;" data-lang="en">🎯 Ready to Get Started?</h2>
+        
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-lang="zh-MY">现在就联络 Spower Solar，获取免费的屋顶评估和系统设计。我们将帮您最大化 SuRIA Home 回扣和 ATAP 收益。</p>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;" data-lang="en">Contact Spower Solar now for free roof assessment and system design. We'll maximize your SuRIA Home rebate and ATAP benefits.</p>
+        
+        <a href="https://wa.me/60123456789?text=你好，我想咨询SuRIA%20Home和ATAP太阳能方案" class="btn btn-primary" style="display: inline-block;" target="_blank">
+            <span data-lang="zh-MY">💬 免费咨询 (WhatsApp)</span>
+            <span data-lang="en">💬 Free Consultation (WhatsApp)</span>
+        </a>
     </section>
 
 </div>
 
-<!-- CTA BAR -->
+<!-- ========== CTA BAR ========== -->
 <div class="cta-bar">
-    <a href="https://wa.me/60123456789?text=你好，我想咨询Spower太阳能方案和SuRIA Home回扣" 
-       class="cta-btn" target="_blank" data-lang="zh">
-        💬 联络销售团队获取免费方案
-    </a>
-    <a href="https://wa.me/60123456789?text=Hi, I'd like to inquire about Spower solar solutions and SuRIA Home rebates" 
-       class="cta-btn" target="_blank" data-lang="en">
-        💬 Contact Our Sales Team
+    <span class="cta-text" data-lang="zh-MY">现在获取免费咨询：</span>
+    <span class="cta-text" data-lang="en">Get Free Consultation Now:</span>
+    <a href="https://wa.me/60123456789?text=你好，我想咨询SuRIA%20Home和ATAP太阳能方案" class="cta-btn" target="_blank">
+        💬 <span data-lang="zh-MY">WhatsApp 我们</span><span data-lang="en">WhatsApp Us</span>
     </a>
 </div>
 
-<!-- JAVASCRIPT -->
+<!-- ========== FOOTER ========== -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Spower Solar Energy</h4>
+            <p data-lang="zh-MY">马来西亚领先的太阳能解决方案提供商</p>
+            <p data-lang="en">Malaysia's Leading Solar Energy Solutions Provider</p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">© 2026 Spower Solar Energy. <span data-lang="zh-MY">版权所有</span><span data-lang="en">All Rights Reserved</span></p>
+        </div>
+        
+        <div class="footer-section">
+            <h4 data-lang="zh-MY">快速链接</h4>
+            <h4 data-lang="en">Quick Links</h4>
+            <a href="#suria" data-lang="zh-MY">SuRIA Home 计划</a>
+            <a href="#suria" data-lang="en">SuRIA Home Program</a><br>
+            <a href="#atap" data-lang="zh-MY">Solar ATAP 机制</a>
+            <a href="#atap" data-lang="en">Solar ATAP Framework</a><br>
+            <a href="#cases" data-lang="zh-MY">成功案例</a>
+            <a href="#cases" data-lang="en">Success Cases</a><br>
+            <a href="#faq" data-lang="zh-MY">常见问答</a>
+            <a href="#faq" data-lang="en">FAQ</a>
+        </div>
+        
+        <div class="footer-section">
+            <h4 data-lang="zh-MY">官方链接</h4>
+            <h4 data-lang="en">Official Links</h4>
+            <a href="https://seda.gov.my" target="_blank">SEDA Malaysia</a><br>
+            <a href="https://www.tnb.com.my" target="_blank">TNB (国能)</a><br>
+            <a href="https://www.st.gov.my" target="_blank" data-lang="zh-MY">能源与天然资源部</a>
+            <a href="https://www.st.gov.my" target="_blank" data-lang="en">Ministry of Energy</a>
+        </div>
+        
+        <div class="footer-section">
+            <h4 data-lang="zh-MY">联系我们</h4>
+            <h4 data-lang="en">Contact Us</h4>
+            <p>📱 WhatsApp: <a href="https://wa.me/60123456789" target="_blank">+60 12-345 6789</a></p>
+            <p>📧 Email: <a href="mailto:info@spowersolar.com.my">info@spowersolar.com.my</a></p>
+            <p data-lang="zh-MY">⏰ 营业时间：周一至周日 9:00 AM - 6:00 PM</p>
+            <p data-lang="en">⏰ Hours: Mon-Sun 9:00 AM - 6:00 PM</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p data-lang="zh-MY">本网站为信息平台，由 Spower Solar Energy 提供。所有信息基于官方政策，仅供参考。最新政策请查阅官方渠道。</p>
+        <p data-lang="en">This website is an information platform provided by Spower Solar Energy. All information based on official policies for reference only. Check official channels for latest updates.</p>
+        <p style="margin-top: 1rem;">
+            <a href="#" style="color: #64748b;" data-lang="zh-MY">隐私政策</a>
+            <a href="#" style="color: #64748b;" data-lang="en">Privacy Policy</a>
+            | 
+            <a href="#" style="color: #64748b;" data-lang="zh-MY">服务条款</a>
+            <a href="#" style="color: #64748b;" data-lang="en">Terms of Service</a>
+        </p>
+    </div>
+</footer>
+
+<!-- ========== LANGUAGE SWITCHING SCRIPT ========== -->
 <script>
 function switchLanguage(lang) {
-    // Update body class
-    document.body.className = 'lang-' + lang;
-    
     // Update button states
-    document.querySelectorAll('.lang-btn').forEach(btn => {
+    document.querySelectorAll('.lang-toggle').forEach(btn => {
         btn.classList.remove('active');
     });
     event.target.classList.add('active');
+    
+    // Update body class
+    if (lang === 'en') {
+        document.body.classList.add('en');
+    } else {
+        document.body.classList.remove('en');
+    }
     
     // Save preference
     localStorage.setItem('preferredLanguage', lang);
 }
 
-// Load saved language preference
-window.addEventListener('load', function() {
-    const savedLang = localStorage.getItem('preferredLanguage') || 'zh';
-    document.body.className = 'lang-' + savedLang;
-    
-    // Update button state
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.textContent.trim() === (savedLang === 'zh' ? '中文' : 'English')) {
-            btn.classList.add('active');
-        }
-    });
-});
-
-// Smooth scroll for any anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
+// Load saved preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('preferredLanguage') || 'zh-MY';
+    if (savedLang === 'en') {
+        document.body.classList.add('en');
+        document.querySelector('.lang-toggle[onclick*="en"]').classList.add('active');
+        document.querySelector('.lang-toggle[onclick*="zh-MY"]').classList.remove('active');
+    }
 });
 </script>
 
